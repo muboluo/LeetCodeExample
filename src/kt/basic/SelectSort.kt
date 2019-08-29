@@ -15,6 +15,13 @@ fun main() {
 
 }
 
+/**
+ * 选择排序： index从第一位开始，依次进行比较。若发现比该位置小的数字，保存currentMinIndex。
+ * 在该论循环结束后，将最小的替换到第一位。
+ * index +1 继续遍历。
+ * 直到最后一位。
+ */
+
 class SelectSort() {
 
 
