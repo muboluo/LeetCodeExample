@@ -9,7 +9,27 @@ package jv.leet.array;
  * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/container-with-most-water
+ * <p>
+ * key: 如果我们试图将指向较长线段的指针向内移动，移动后，新形成的矩形，受限于先前较小的线段的概率会更大。我们的目标是寻找新的受限条件，
+ * 而不是替换不受限的条件。
+ * 我们只有在X轴不断减小的同时，寻找更高的Y轴线段才能获得更大的矩形。
  */
 class MaxArea {
+
+    public int maxArea(int[] height) {
+
+        int l = 0, r = height.length - 1, maxArea = 0;
+
+        while (l < r) {
+            maxArea = Math.max(maxArea, (r - l) * Math.min(height[l], height[r]));
+
+            if (height[l] < height[r]) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+        return maxArea;
+    }
 
 }
