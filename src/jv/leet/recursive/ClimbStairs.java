@@ -28,21 +28,21 @@ public class ClimbStairs {
 
     public int climbStairsRecursive(int n) {
 
-        // terminator
+        //terminal
         if (n <= 1) {
             return 1;
-        }
-
-        if (n <= 2) {
+        } else if (n <= 2) {
             return n;
         }
 
-        // do our job @ this level
-        // jump 2 next level
-        int currentLevCount = climbStairsRecursive(n - 1) + climbStairsRecursive(n - 2);
+        //current level handle
+        int result = climbStairsRecursive(n - 1) + climbStairsRecursive(n - 2);
+        //jump next level
 
         // reset clause
-        return currentLevCount;
+
+        return result;
+
     }
 
     public int climbStairsArray(int n) {

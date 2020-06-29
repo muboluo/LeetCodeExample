@@ -16,19 +16,26 @@ class SumOf2Num {
 
     public int[] twoSum(int[] nums, int target) {
 
-        Map<Integer, Integer> sumMap = new HashMap<>();
+        Map<Integer, Integer> resultMap = new HashMap();
 
         for (int i = 0; i < nums.length; ++i) {
+            final int another_num = target - nums[i];
 
-            int complement = target - nums[i];
-            if (sumMap.containsKey(complement)) {
-                return new int[]{sumMap.get(complement), i};
+            if (resultMap.containsKey(another_num)) {
+                return new int[]{resultMap.get(another_num), i};
             }
-            sumMap.put(nums[i], i);
+            resultMap.put(nums[i], i);
         }
 
-        throw new IllegalArgumentException("no tow sum solution");
+        return new int[]{-1, -1};
 
+    }
+
+    public static void main(String[] args) {
+
+        final int[] resultArray = new SumOf2Num().twoSum(new int[]{2, 7, 11, 8, 15}, 10);
+
+        System.out.println(resultArray[0] + "   " + resultArray[1]);
     }
 
 }

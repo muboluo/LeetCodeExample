@@ -28,7 +28,7 @@ class MoveZero {
             return 0;
         }
 
-        int i= 0;
+        int i = 0;
 
         for (int j = 0; j < nums.length; ++j) {
 
@@ -41,6 +41,10 @@ class MoveZero {
         }
         return i + 1;
 
+    }
+
+    public static void main(String[] args) {
+        new MoveZero().MoveZeroTest(new int[]{1, 2, 3, 4});
     }
 
 }
