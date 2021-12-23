@@ -20,31 +20,150 @@ package jv.sevenday;
  * <p>
  * 2 注意边界条件的判断，eg: 数组为空该怎么处理？
  */
-class MoveZero {
 
-    public int MoveZeroTest(int nums[]) {
+import java.util.Arrays;
 
-        if (nums.length == 0) {
-            return 0;
-        }
-
-        int i = 0;
-
-        for (int j = 0; j < nums.length; ++j) {
-
-            if (nums[i] != nums[j]) {
-
-                nums[++i] = nums[j];
-
-            }
-
-        }
-        return i + 1;
-
-    }
+/**
+ * 2021年12月20日23:26:14
+ * https://leetcode-cn.com/problems/move-zeroes/
+ * 移动 0
+ * 输入: [0,1,0,3,12]
+ * 输出: [1,3,12,0,0]
+ * 解法：
+ * 1 双指针法
+ * 2 两次循环发
+ * 3 双指针 优化法
+ */
+public class MoveZero {
 
     public static void main(String[] args) {
-        new MoveZero().MoveZeroTest(new int[]{1, 2, 3, 4});
+
+        int[] ints = new int[]{0, 1, 0, 3, 12};
+        moveZeroBy1For(ints);
+        moveZeroBy2For(ints);
+        moveZeroBy1ForImp(ints);
+
+        moveZeroBy1ForRepeat1(ints);
+        moveZeroBy2ForRepeat1(ints);
+        moveZeroBy1ForImpRepeat1(ints);
     }
 
+    private static void moveZeroBy1ForImpRepeat1(int[] ints) {
+
+        if (ints == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < ints.length; i++) {
+            if (ints[i] != 0) {
+                if (j < i) {
+                    ints[j] = ints[i];
+                    ints[i] = 0;
+                }
+                j++;
+            }
+        }
+        System.out.println(Arrays.toString(ints));
+    }
+
+    //
+    private static void moveZeroBy2ForRepeat1(int[] ints) {
+
+        if (ints == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < ints.length; i++) {
+            if (ints[i] != 0) {
+                ints[j++] = ints[i];
+            }
+        }
+        for (int i = j; i < ints.length; i++) {
+            ints[i] = ints[j];
+        }
+        System.out.println(Arrays.toString(ints));
+    }
+
+    private static void moveZeroBy1ForImp(int[] ints) {
+        if (ints == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < ints.length; i++) {
+            if (ints[i] != 0) {
+                if (i > j) {
+                    ints[j] = ints[i];
+                    ints[i] = 0;
+                }
+                j++;
+            }
+        }
+    }
+
+    private static void moveZeroBy1ForRepeat1(int[] ints) {
+        if (ints == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < ints.length; i++) {
+
+            if (ints[i] != 0) {
+                int temp = ints[i];
+                ints[i] = ints[j];
+                ints[j++] = temp;
+            }
+        }
+
+        System.out.println(Arrays.toString(ints));
+    }
+
+    /**
+     * 一次 for 循环，采用的是快速排序的思想
+     *
+     * @param array
+     * @return
+     */
+    private static int[] moveZeroBy1For(int[] array) {
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        // 右边一直移动的指针
+        int point0 = 0;
+        for (int i = 0; i < array.length; i++) {
+
+            if (array[i] != 0) {
+
+                int temp = array[i];
+                array[i] = array[point0];
+                array[point0++] = temp;
+            }
+        }
+
+        System.out.println(Arrays.toString(array));
+        return array;
+    }
+
+    /**
+     * 2次 for 循环， 一次移动非0，一次补充0
+     *
+     * @param ints
+     */
+    private static void moveZeroBy2For(int[] ints) {
+
+        int j = 0;
+        // 移动非 0 元素
+        for (int i = 0; i < ints.length; i++) {
+
+            if (ints[i] != 0) {
+                ints[j++] = ints[i];
+            }
+        }
+        // 补充 0  元素
+        for (int i = j; i < ints.length; i++) {
+            ints[i] = 0;
+        }
+
+        System.out.println(Arrays.toString(ints));
+    }
 }
