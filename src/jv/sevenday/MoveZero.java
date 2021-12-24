@@ -46,6 +46,68 @@ public class MoveZero {
         moveZeroBy1ForRepeat1(ints);
         moveZeroBy2ForRepeat1(ints);
         moveZeroBy1ForImpRepeat1(ints);
+
+        moveZeroBy1ForRepeat2(ints);
+        moveZeroBy1ForImpRepeat2(ints);
+        moveZeroBy2ForRepeat2(ints);
+    }
+
+    private static void moveZeroBy2ForRepeat2(int[] nums) {
+        // 交换 -> 两次赋值
+        if (nums == null) {
+            return;
+        }
+
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j++] = nums[i];
+            }
+
+        }
+
+        for (int i = j; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+
+    }
+
+    private static void moveZeroBy1ForImpRepeat2(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] != 0) {
+                if (j < i) {
+                    nums[j] = nums[i];
+                    nums[i] = 0;
+                }
+                j++;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+
+    }
+
+    private static void moveZeroBy1ForRepeat2(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] != 0) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j++] = temp;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+
     }
 
     private static void moveZeroBy1ForImpRepeat1(int[] ints) {
