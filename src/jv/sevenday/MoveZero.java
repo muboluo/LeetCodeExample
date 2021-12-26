@@ -2,7 +2,7 @@ package jv.sevenday;
 
 /**
  * 题目要求： 将 一个有序数组中，删除相同项，并计算出非重复数据的长度。
- * 地址：
+ * 地址：https://leetcode-cn.com/problems/move-zeroes/submissions/
  * 思路： 采用双指针法，增加维度。
  * 1 一个慢指针，一个快指针。 从0开始判断。因为数组有序，所以如果有相同项，他们肯定是相邻的。
  * 所以现在有两种情况：

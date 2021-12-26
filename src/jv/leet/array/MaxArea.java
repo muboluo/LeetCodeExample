@@ -15,32 +15,35 @@ package jv.leet.array;
  * 我们只有在X轴不断减小的同时，寻找更高的Y轴线段才能获得更大的矩形。
  * https://leetcode-cn.com/problems/container-with-most-water/solution/container-with-most-water-shuang-zhi-zhen-fa-yi-do/
  * 这篇文章分析的很不错，讲到了消去所有的状态。
- *
  */
 class MaxArea {
 
-    public int maxArea(int[] height) {
+    public static int maxArea(int[] heightArray) {
 
-        int left = 0, right = height.length - 1, maxArea = 0;
+        int result = 0;
+        if (heightArray == null) {
+            return result;
+        }
+        int left = 0, right = heightArray.length - 1;
 
         while (left < right) {
 
-            maxArea = Math.max(maxArea, Math.min(height[left], height[right]) * (right - left));
+            result = Math.max(Math.min(heightArray[left], heightArray[right]) * (right - left), result);
 
-            if (height[left] < height[right]) {
+            if (heightArray[left] < heightArray[right]) {
                 left++;
             } else {
                 right--;
             }
-
         }
 
-        return maxArea;
+        return result;
+
     }
 
     public static void main(String[] args) {
 
-        final int result = new MaxArea().maxArea(new int[]{1, 2, 3, 4, 5, 6});
+        final int result = maxArea(new int[]{1, 2, 3, 4, 5, 6});
 
         System.out.println(result);
     }
