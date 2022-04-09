@@ -10,11 +10,14 @@ package jv.leet.array;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/container-with-most-water
  * <p>
- * key: 如果我们试图将指向较长线段的指针向内移动，移动后，新形成的矩形，受限于先前较小的线段的概率会更大。我们的目标是寻找新的受限条件，
- * 而不是替换不受限的条件。
+ * key: 如果我们试图将指向较长线段的指针向内移动，移动后，新形成的矩形，受限于先前较小的线段的概率会更大。
+ * 目标：我们的目标是寻找新的受限条件，而不是替换不受限的条件。
  * 我们只有在X轴不断减小的同时，寻找更高的Y轴线段才能获得更大的矩形。
  * https://leetcode-cn.com/problems/container-with-most-water/solution/container-with-most-water-shuang-zhi-zhen-fa-yi-do/
  * 这篇文章分析的很不错，讲到了消去所有的状态。
+ * <p>
+ * 疑问点1：
+ * 怎么证明移动 y 轴值小的一方，更有可能找到更大面积的矩形。
  */
 class MaxArea {
 
@@ -41,11 +44,36 @@ class MaxArea {
 
     }
 
+    // 第二遍
+    public static int maxArea2(int[] heightArray) {
+
+        int result = 0;
+        if (heightArray == null) {
+            return result;
+        }
+
+        int left = 0, right = heightArray.length - 1;
+
+        while (left < right) {
+
+            result = Math.max(result, (right - left) * Math.min(heightArray[left], heightArray[right]));
+
+            if (heightArray[left] < heightArray[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
 
         final int result = maxArea(new int[]{1, 2, 3, 4, 5, 6});
+        final int result2 = maxArea2(new int[]{1, 2, 3, 4, 5, 6});
 
         System.out.println(result);
+        System.out.println(result2);
     }
 
 }
