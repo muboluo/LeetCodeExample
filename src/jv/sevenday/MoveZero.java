@@ -41,7 +41,7 @@ public class MoveZero {
 
     public static void main(String[] args) {
 
-        int[] ints = new int[]{0, 1, 0, 3, 12};
+        int[] ints = new int[]{0, 5, 6, 0, 1, 0, 3, 12};
 //        moveZeroBy1For(ints);
 //        moveZeroBy2For(ints);
 //        moveZeroBy1ForImp(ints);
@@ -52,9 +52,9 @@ public class MoveZero {
 //
 //        moveZeroBy1ForRepeat2(ints);
 //        moveZeroBy1ForImpRepeat2(ints);
-//        moveZeroBy2ForRepeat2(ints);
+        moveZeroBy2ForRepeat2(ints);
 
-        moveZeroBy1ForRepeat3(ints);
+//        moveZeroBy1ForRepeat3(ints);
     }
 
     private static void moveZeroBy1ForRepeat3(int[] ints) {
@@ -62,18 +62,19 @@ public class MoveZero {
         if (ints == null) {
             return;
         }
-
-        // 用来存储待交换的数据的 index
         int j = 0;
-
         for (int i = 0; i < ints.length; i++) {
 
-            if (ints[i] != 0 && i != j) {
-
-                int temp = ints[i];
-                ints[i] = ints[j];
-                ints[j++] = temp;
+            if (ints[i] != 0) {
+                if (i != j) {
+                    int temp = ints[i];
+                    ints[i] = ints[j];
+                    ints[j] = temp;
+                }
+                j++;
             }
+
+
         }
         System.out.println(Arrays.toString(ints));
     }
@@ -86,16 +87,16 @@ public class MoveZero {
 
         int j = 0;
         for (int i = 0; i < nums.length; i++) {
+
             if (nums[i] != 0) {
                 nums[j++] = nums[i];
             }
-
         }
 
         for (int i = j; i < nums.length; i++) {
             nums[i] = 0;
         }
-
+        System.out.println(Arrays.toString(nums));
     }
 
     private static void moveZeroBy1ForImpRepeat2(int[] nums) {
