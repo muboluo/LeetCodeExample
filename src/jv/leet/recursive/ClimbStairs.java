@@ -35,9 +35,7 @@ public class ClimbStairs {
     public static int climbStairsRecursive(int n) {
 
         //terminal ，递归到最后一级的结果。
-        if (n <= 1) {
-            return 1;
-        } else if (n <= 2) {
+        if (n <= 2) {
             return n;
         }
 
@@ -72,20 +70,62 @@ public class ClimbStairs {
             count[i] = count[i - 1] + count[i - 2];
         }
 
+        System.out.println(count[n - 1]);
         return count[n - 1];
 
     }
 
     public static void main(String[] args) {
 
-        int result = climbStairsRecursive(10);
-
+        int result = climbStairsRecursive(20);
         System.out.println(result);
+        int result3 = climbStairsRecursive2(20);
+        System.out.println(result3);
 
-        int result2 = climbStairsArray(10);
+        climbStairsArray(20);
+        climbStairsArray2(20);
 
-        System.out.println(result2);
+    }
 
+    // 爬楼梯 - 数组形式 - 第二遍
+    private static int climbStairsArray2(int n) {
+
+        if (n <= 2) {
+            return n;
+        }
+
+        int[] result = new int[n];
+
+        result[0] = 1;
+        result[1] = 2;
+
+        for (int i = 2; i < result.length; i++) {
+
+            result[i] = result[i - 1] + result[i - 2];
+        }
+
+        System.out.println(result[n - 1]);
+
+        return result[n - 1];
+    }
+
+    // 递归实现 - 第二遍
+    private static int climbStairsRecursive2(int n) {
+
+        // 递归四步骤
+
+        // terminal
+        if (n <= 2) {
+            return n;
+        }
+
+        // current level handle
+        int result = climbStairsRecursive2(n - 1) + climbStairsRecursive2(n - 2);
+        // jump next level
+
+        // reset clause
+
+        return result;
     }
 
 }
