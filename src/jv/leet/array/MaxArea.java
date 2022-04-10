@@ -82,6 +82,8 @@ class MaxArea {
 
     // 第三遍
     private static int maxArea3(int[] ints) {
+        // 我们的目标是，在X轴不断减小的同时，不断寻找更高的Y轴。
+        // 寻找新的受限条件，而不是，替换不受限条件。
 
         int result = 0;
         if (ints == null) {
