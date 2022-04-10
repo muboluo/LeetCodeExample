@@ -43,7 +43,7 @@ public class ClimbStairs {
 
         //current level handle， 处理当前层级的实现。
         int result = climbStairsRecursive(n - 1) + climbStairsRecursive(n - 2);
-        //jump next level
+        //jump next level 跳转到下一个层级
 
         // reset clause 重置递归条件
 
@@ -52,8 +52,10 @@ public class ClimbStairs {
     }
 
     // 通过数组的方式处理 - 第一遍
+    // 数组中存储的 value ，是走到当前层级，一共需要多少步。
     public static int climbStairsArray(int n) {
 
+        // 特例，与 递归一样。
         if (n <= 1) {
             return 1;
         } else if (n == 2) {
