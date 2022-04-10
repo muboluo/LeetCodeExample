@@ -55,7 +55,60 @@ public class MoveZero {
         moveZeroBy2ForRepeat2(ints);
 
 //        moveZeroBy1ForRepeat3(ints);
+
+        move0For1Repeat3(new int[]{0, 5, 6, 0, 1, 0, 3, 12});
+        move0For2Repeat3(new int[]{0, 5, 6, 0, 1, 0, 3, 12});
     }
+
+    // 两次 for 循环， 第三遍
+    private static void move0For2Repeat3(int[] arrays) {
+
+        if (arrays == null) {
+            return;
+        }
+
+        int j = 0;
+        for (int i = 0; i < arrays.length; i++) {
+            if (arrays[i] != 0) {
+                arrays[j++] = arrays[i];
+            }
+        }
+
+        for (int i = j; i < arrays.length; i++) {
+            arrays[i] = 0;
+        }
+
+        System.out.println(Arrays.toString(arrays));
+
+    }
+
+    // 一次for循环， 第三遍
+    private static void move0For1Repeat3(int[] arrays) {
+
+        if (arrays == null) {
+            return;
+        }
+
+        // 记录需要指向 值为 0  的index
+        int j = 0, temp = 0;
+
+        for (int i = 0; i < arrays.length; i++) {
+
+            if (arrays[i] != 0) {
+
+                if (i != j) {
+                    temp = arrays[i];
+                    arrays[i] = arrays[j];
+                    arrays[j] = temp;
+                }
+                j++;
+            }
+        }
+        System.out.println(Arrays.toString(arrays));
+    }
+
+
+    // 一次for循环移动 0 ，第三遍
 
     private static void moveZeroBy1ForRepeat3(int[] ints) {
 
