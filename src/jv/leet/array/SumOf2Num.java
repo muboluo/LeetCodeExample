@@ -51,7 +51,7 @@ class SumOf2Num {
             return resultArray;
         }
 
-        // 目标，把 数组的index，放到 以数组中的值作为 key 的 map 中
+        // 目标，把 数组的index，放到 以数组中的值作为 key 的 map 的value中。
         Map<Integer, Integer> map = new HashMap();
         for (int i = 0; i < nums.length; i++) {
 
