@@ -1,5 +1,8 @@
 package jv.leet.array;
 
+import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +17,7 @@ import java.util.Map;
 
 class SumOf2Num {
 
-    public int[] twoSum(int[] nums, int target) {
+    public static int[] twoSum(int[] nums, int target) {
 
         Map<Integer, Integer> resultMap = new HashMap();
 
@@ -33,9 +36,38 @@ class SumOf2Num {
 
     public static void main(String[] args) {
 
-        final int[] resultArray = new SumOf2Num().twoSum(new int[]{2, 7, 11, 8, 15}, 10);
-
+        final int[] resultArray = twoSum(new int[]{2, 7, 11, 8, 15}, 10);
         System.out.println(resultArray[0] + "   " + resultArray[1]);
+
+        twoSum2(new int[]{2, 7, 11, 8, 15}, 10);
+    }
+
+    // 两数之和 ， 取出对应的index - 第二次
+    private static int[] twoSum2(int[] nums, int target) {
+
+        int[] resultArray = new int[]{-1, -1};
+
+        if (nums == null) {
+            return resultArray;
+        }
+
+        // 目标，把 数组的index，放到 以数组中的值作为 key 的 map 中
+        Map<Integer, Integer> map = new HashMap();
+        for (int i = 0; i < nums.length; i++) {
+
+            int anotherNum = target - nums[i];
+            if (!map.containsKey(anotherNum)) {
+                map.put(nums[i], i);
+            } else {
+
+                resultArray[0] = map.get(anotherNum);
+                resultArray[1] = i;
+                break;
+            }
+        }
+
+        System.out.println(Arrays.toString(resultArray));
+        return resultArray;
     }
 
 }
