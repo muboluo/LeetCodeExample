@@ -79,12 +79,52 @@ public class ClimbStairs {
 
         int result = climbStairsRecursive(20);
         System.out.println(result);
-        int result3 = climbStairsRecursive2(20);
+        int result2 = climbStairsRecursive2(20);
+        System.out.println(result2);
+        int result3 = climbStairsRecursive3(20);
         System.out.println(result3);
 
         climbStairsArray(20);
         climbStairsArray2(20);
+        climbStairsArray3(20);
 
+    }
+
+    // 爬楼梯 - 数组形式解决 - 第三遍
+    private static void climbStairsArray3(int n) {
+
+        if (n <= 2) {
+            return;
+        }
+
+        int[] resultArray = new int[n];
+        resultArray[0] = 1;
+        resultArray[1] = 2;
+
+        for (int i = 2; i < resultArray.length; i++) {
+            resultArray[i] = resultArray[i - 1] + resultArray[i - 2];
+        }
+
+        System.out.println(resultArray[n - 1]);
+
+
+    }
+
+    // 爬楼梯-递归 - 第三遍
+    private static int climbStairsRecursive3(int n) {
+        // 递归四步骤
+        // terminal
+        if (n <= 2) {
+            return n;
+        }
+
+        // current level handle
+        int result = climbStairsRecursive3(n - 1) + climbStairsRecursive3(n - 2);
+
+        // jump next level
+
+        // reset clause
+        return result;
     }
 
     // 爬楼梯 - 数组形式 - 第二遍
