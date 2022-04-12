@@ -40,9 +40,36 @@ class SumOf2Num {
         System.out.println(resultArray[0] + "   " + resultArray[1]);
 
         twoSum2(new int[]{2, 7, 11, 8, 15}, 10);
+        twoSum3(new int[]{2, 7, 11, 8, 15}, 10);
     }
 
-    // 两数之和 ， 取出对应的index - 第二次
+    // 两数之和 存储对应的index - 第三次
+    private static int[] twoSum3(int[] nums, int target) {
+
+        int[] resultArray = new int[]{-1, -1};
+        if (nums == null) {
+            return resultArray;
+        }
+
+        // 将 数组中的value 作为 key， index 作为value。存储在map中，当满足key的规则时，将value取出来。
+        Map<Integer, Integer> map = new HashMap();
+        for (int i = 0; i < nums.length; i++) {
+
+            int anotherNum = target - nums[i];
+            if (map.containsKey(anotherNum)) {
+
+                resultArray[0] = map.get(anotherNum);
+                resultArray[1] = i;
+                break;
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        System.out.println(Arrays.toString(resultArray));
+        return resultArray;
+    }
+
+    // 两数之和 取出对应的index - 第二次
     private static int[] twoSum2(int[] nums, int target) {
 
         int[] resultArray = new int[]{-1, -1};
