@@ -33,7 +33,71 @@ class SumOfThreeNums {
     public static void main(String[] args) {
 
         threeSum(new int[]{-1, 0, 1, 2, -1, -4});
+        System.out.println("-------------");
         threeSum2(new int[]{-1, 0, 1, 2, -1, -4});
+        System.out.println("-------------");
+        threeSum3(new int[]{-1, 0, 1, 2, -1, -4});
+        System.out.println("-------------");
+    }
+
+    // 三数之和 - 第三遍
+    private static List<List<Integer>> threeSum3(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        // terminal
+        if (nums == null || nums.length < 3) {
+            return result;
+        }
+
+        Arrays.sort(nums);
+
+        int l = 0, r = nums.length - 1;
+        // for loop
+        for (int i = 0; i < nums.length; i++) {
+
+            // for terminal
+            if (nums[i] > 0) {
+                break;
+            }
+
+            // for terminal
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            l = i + 1;
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0) {
+
+                    result.add(Arrays.asList(nums[i], nums[l], nums[r]));
+
+                    while (l < r && nums[l] == nums[l + 1]) {
+                        l++;
+                    }
+
+                    while (l < r && nums[r] == nums[r - 1]) {
+                        r--;
+                    }
+                    l++;
+                    r--;
+                } else if (sum < 0) {
+                    l++;
+                } else {
+                    r--;
+                }
+            }
+
+        }
+
+        for (List<Integer> list :
+                result) {
+
+            System.out.println(Arrays.toString(list.toArray()));
+        }
+
+
+        return result;
     }
 
     private static List<List<Integer>> threeSum2(int[] nums) {
@@ -72,11 +136,11 @@ class SumOfThreeNums {
                 if (sum == 0) {
                     result.add(Arrays.asList(nums[l], nums[i], nums[r]));
                     // jump next level
-                    if (l < r && nums[l] == nums[l + 1]) {
+                    while (l < r && nums[l] == nums[l + 1]) {
                         l++;
                     }
 
-                    if (l < r && nums[r] == nums[r - 1]) {
+                    while (l < r && nums[r] == nums[r - 1]) {
                         r--;
                     }
 
