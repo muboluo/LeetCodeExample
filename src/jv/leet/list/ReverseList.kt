@@ -26,10 +26,10 @@ class ReverseList {
             var cur: ListNode? = head
 
             while (cur != null) {
-
-                val next: ListNode? = cur.next
+                val next = cur.next
                 cur.next = pre
                 pre = cur
+                // jump next level
                 cur = next
             }
             return pre
