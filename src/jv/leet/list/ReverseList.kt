@@ -1,7 +1,5 @@
 package jv.leet.list
 
-import javax.swing.ListModel
-
 /**
  * 反转链表
  * <p>
@@ -34,6 +32,19 @@ class ReverseList {
             }
             return pre
         }
+
+        fun reverseList2(head: ListNode): ListNode? {
+
+            var pre: ListNode? = null
+            var cur: ListNode? = head
+            while (cur != null) {
+                val next = cur.next
+                cur.next = pre
+                pre = cur
+                cur = next
+            }
+            return pre
+        }
     }
 
 
@@ -47,7 +58,7 @@ fun main() {
     var node3: ReverseList.ListNode = ReverseList.ListNode(node4)
     var node2: ReverseList.ListNode = ReverseList.ListNode(node3)
     var node1: ReverseList.ListNode = ReverseList.ListNode(node2)
-    val node5 = ReverseList.reverseList(node1)
+    val node5 = ReverseList.reverseList2(node1)
 
     System.out.println(node5)
 
