@@ -74,10 +74,31 @@ class MaxArea {
         final int result = maxArea(new int[]{1, 2, 3, 4, 5, 6});
         final int result2 = maxArea2(new int[]{1, 2, 3, 4, 5, 6});
         final int result3 = maxArea3(new int[]{1, 2, 3, 4, 5, 6});
+        final int result4 = maxArea4(new int[]{1, 2, 3, 4, 5, 6});
 
         System.out.println(result);
         System.out.println(result2);
         System.out.println(result3);
+        System.out.println(result4);
+    }
+
+    private static int maxArea4(int[] nums) {
+        int result = -1;
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+
+        int left = 0, right = nums.length - 1;
+
+        while (left < right) {
+            result = Math.max(result, Math.min(nums[left], nums[right]) * (right - left));
+            if (nums[left] < nums[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return result;
     }
 
     // 第三遍
