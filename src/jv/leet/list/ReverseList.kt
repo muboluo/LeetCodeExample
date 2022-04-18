@@ -64,9 +64,22 @@ class ReverseList {
             while (cur != null) {
                 // 参数一 表示 next ，参数2 表示当前value
                 result = ListNode(result, cur.value)
+                cur = cur.next
             }
 
             return result
+        }
+
+        fun reverseListMethod22(head: ListNode): ListNode? {
+
+            var next: ListNode? = null
+            var cur: ListNode? = head
+            while (cur != null) {
+                // 取出当前节点的value，复制给next 节点。
+                next = ListNode(next, cur.value)
+                cur = cur.next
+            }
+            return next
         }
     }
 
