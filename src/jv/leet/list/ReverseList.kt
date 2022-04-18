@@ -11,8 +11,8 @@ package jv.leet.list
  * <p>
  * 链接：https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode-solution-d1k2/
  * <p>
- * 时间复杂度 O(n)
- * 空间复杂度 O(1)
+ * 方法1 的时间复杂度 O(n) 空间复杂度 O(1)
+ * 方法2 的时间复杂度 O(n) 空间复杂度 O(n)
  */
 class ReverseList {
 
@@ -45,10 +45,33 @@ class ReverseList {
             }
             return pre
         }
+
+        fun reverseList3(head: ListNode): ListNode? {
+            var pre: ListNode? = null
+            var cur: ListNode? = head
+            while (cur != null) {
+                var next = cur.next
+                cur.next = pre
+                pre = cur
+                cur = next
+            }
+            return cur
+        }
+
+        fun reverseListMethod2(head: ListNode): ListNode? {
+            var result: ListNode? = null
+            var cur: ListNode? = head
+            while (cur != null) {
+                // 参数一 表示 next ，参数2 表示当前value
+                result = ListNode(result, cur.value)
+            }
+
+            return result
+        }
     }
 
 
-    class ListNode(var next: ListNode? = null) {
+    class ListNode(var next: ListNode? = null, var value: String = "") {
     }
 
 }
