@@ -41,6 +41,31 @@ class SumOf2Num {
 
         twoSum2(new int[]{2, 7, 11, 8, 15}, 10);
         twoSum3(new int[]{2, 7, 11, 8, 15}, 10);
+        twoSum4(new int[]{2, 7, 11, 8, 15}, 10);
+    }
+
+    // 两数之和 第四遍
+    private static int[] twoSum4(int[] nums, int target) {
+
+        int[] result = new int[]{-1, -1};
+
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+
+        Map<Integer, Integer> valueIndexMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int anotherNum = target - nums[i];
+            if (valueIndexMap.containsKey(anotherNum)) {
+                result[0] = valueIndexMap.get(anotherNum);
+                result[1] = i;
+                break;
+            } else {
+                valueIndexMap.put(nums[i], i);
+            }
+        }
+        System.out.println(Arrays.toString(result));
+        return result;
     }
 
     // 两数之和 存储对应的index - 第三次
