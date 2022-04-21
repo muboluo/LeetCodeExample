@@ -1,4 +1,4 @@
-package jv.sevenday;
+package jv.leet.array;
 
 /**
  * 题目要求： 将 一个有序数组中，删除相同项，并计算出非重复数据的长度。
@@ -58,6 +58,44 @@ public class MoveZero {
 
         move0For1Repeat3(new int[]{0, 5, 6, 0, 1, 0, 3, 12});
         move0For2Repeat3(new int[]{0, 5, 6, 0, 1, 0, 3, 12});
+        move0For1Repeat4(new int[]{0, 5, 6, 0, 1, 0, 3, 12});
+        move0For2Repeat4(new int[]{0, 5, 6, 0, 1, 0, 3, 12});
+    }
+
+    private static void move0For2Repeat4(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j++] = nums[i];
+            }
+        }
+
+        for (int i = j; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    }
+
+    // 一次 for 循环 移动 0
+    private static void move0For1Repeat4(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return;
+        }
+        int j = 0, temp = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] != 0) {
+                if (i != j) {
+                    temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                }
+                j++;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
     }
 
     // 两次 for 循环， 第三遍
