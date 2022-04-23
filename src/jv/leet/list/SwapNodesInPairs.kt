@@ -26,7 +26,6 @@ class SwapNodesInPairs {
 
             var dummyHead = ListNode(head)
             var temp = dummyHead
-            var index = 0
             // 设置 terminal
             while (temp.next != null && temp.next?.next != null) {
 
@@ -49,6 +48,40 @@ class SwapNodesInPairs {
             return dummyHead.next
 
         }
+
+        fun swapNode2(nodeHead: ListNode?): ListNode? {
+
+            ListNode.printNode(nodeHead)
+
+            if (nodeHead == null) {
+                return null
+            }
+
+            val dummyHead = ListNode(nodeHead)
+            var temp = dummyHead
+
+            while (temp.next != null && temp.next?.next != null) {
+
+                var node1 = temp.next
+                var node2 = temp.next?.next
+
+                // update pre level point @
+                temp.next = node2
+
+                // handle current level
+                node1?.next = node2?.next
+                node2?.next = node1
+
+                // jump next level and reset clause
+                if (node1 != null) {
+                    temp = node1
+                }
+
+            }
+
+            ListNode.printNode(dummyHead.next)
+            return dummyHead.next
+        }
     }
 
 }
@@ -59,6 +92,7 @@ fun main() {
     var node2 = ListNode(node1)
     var node3 = ListNode(node2)
     var nodeHead = ListNode(node3)
-    SwapNodesInPairs.swapNode(nodeHead)
+//    SwapNodesInPairs.swapNode(nodeHead)
+    SwapNodesInPairs.swapNode2(nodeHead)
 
 }
