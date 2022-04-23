@@ -82,6 +82,38 @@ class SwapNodesInPairs {
             ListNode.printNode(dummyHead.next)
             return dummyHead.next
         }
+
+        // 递归， 实现 ListNode 两两交换
+        fun swapNodeRecursive(nodeHead: ListNode?): ListNode? {
+
+            // set terminal
+            if (nodeHead?.next == null) {
+                return nodeHead
+            }
+            // handle current level
+            var newHead = nodeHead.next
+            nodeHead.next = swapNodeRecursive(newHead?.next)
+            newHead?.next = nodeHead
+            // jump next level
+            // reset clause
+            return newHead
+        }
+
+        fun swapNodeRecursive2(nodeHead: ListNode?): ListNode? {
+            // set terminal
+            if (nodeHead?.next == null) {
+                return nodeHead
+            }
+            // handle current level
+            var newHead = nodeHead.next
+            nodeHead.next = swapNodeRecursive(newHead?.next)
+            newHead?.next = nodeHead
+
+            // jump next level
+            // reset clause
+            return newHead
+
+        }
     }
 
 }
@@ -93,6 +125,10 @@ fun main() {
     var node3 = ListNode(node2)
     var nodeHead = ListNode(node3)
 //    SwapNodesInPairs.swapNode(nodeHead)
-    SwapNodesInPairs.swapNode2(nodeHead)
+//    SwapNodesInPairs.swapNode2(nodeHead)
+    ListNode.printNode(nodeHead)
+//    val result = SwapNodesInPairs.swapNodeRecursive(nodeHead)
+    val result = SwapNodesInPairs.swapNodeRecursive2(nodeHead)
+    ListNode.printNode(result)
 
 }
