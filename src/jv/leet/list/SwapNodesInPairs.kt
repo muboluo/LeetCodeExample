@@ -1,7 +1,5 @@
 package jv.leet.list
 
-import java.util.*
-
 
 /**
  * 给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
@@ -25,10 +23,10 @@ class SwapNodesInPairs {
         fun swapNode(head: ListNode?): ListNode? {
 
             ListNode.printNode(head)
-            // 创建傀儡节点
-            var dummyHead = ListNode()
-            dummyHead.next = head
+
+            var dummyHead = ListNode(head)
             var temp = dummyHead
+            var index = 0
             // 设置 terminal
             while (temp.next != null && temp.next?.next != null) {
 
@@ -36,9 +34,12 @@ class SwapNodesInPairs {
                 var node1 = temp.next
                 var node2 = temp.next?.next
                 // handle current level
-                temp.next = node2
-                node1?.next = node2?.next
-                node2?.next = node1
+                // temp -> node1 -> node2
+                // 更新上一个层级指向新的 "node1"
+                temp.next = node2  // temp ->  node2
+                // exchange node
+                node1?.next = node2?.next // node1 -> node3
+                node2?.next = node1 // node2 -> node1
                 // jump next level, reset clause
                 if (node1 != null) {
                     temp = node1
