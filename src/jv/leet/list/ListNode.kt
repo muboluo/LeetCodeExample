@@ -11,7 +11,7 @@ class ListNode(var next: ListNode? = null, var value: String = "") {
                 System.out.print(" ")
                 print = print.next
             }
-            System.out.println("")
+            System.out.println("-----------")
         }
     }
 }
