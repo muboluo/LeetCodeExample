@@ -84,16 +84,13 @@ class ReverseList {
     }
 
 
-    class ListNode(var next: ListNode? = null, var value: String = "") {
-    }
-
 }
 
 fun main() {
-    var node4: ReverseList.ListNode = ReverseList.ListNode()
-    var node3: ReverseList.ListNode = ReverseList.ListNode(node4)
-    var node2: ReverseList.ListNode = ReverseList.ListNode(node3)
-    var node1: ReverseList.ListNode = ReverseList.ListNode(node2)
+    var node4: ListNode = ListNode()
+    var node3: ListNode = ListNode(node4)
+    var node2: ListNode = ListNode(node3)
+    var node1: ListNode = ListNode(node2)
     val node5 = ReverseList.reverseList2(node1)
 
     System.out.println(node5)
