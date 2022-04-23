@@ -25,7 +25,7 @@ class SwapNodesInPairs {
         fun swapNode(head: ListNode?): ListNode? {
 
             ListNode.printNode(head)
-            //
+            // 创建傀儡节点
             var dummyHead = ListNode()
             dummyHead.next = head
             var temp = dummyHead
@@ -33,7 +33,7 @@ class SwapNodesInPairs {
             while (temp.next != null && temp.next?.next != null) {
 
                 // 获取 node1 node2
-                var node1 = temp.next;
+                var node1 = temp.next
                 var node2 = temp.next?.next
                 // handle current level
                 temp.next = node2
