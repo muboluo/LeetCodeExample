@@ -143,6 +143,19 @@ class SwapNodesInPairs {
             ListNode.printNode(dummyHead.next)
             return dummyHead.next
         }
+
+        fun swapNodeRecursive3(nodeHead: ListNode?): ListNode? {
+
+            // terminal, 传入的是当前层的第一个元素
+            if (nodeHead?.next == null) {
+                return nodeHead
+            }
+            // handle current level
+            val newHead = nodeHead?.next
+            nodeHead.next = swapNodeRecursive3(newHead?.next)
+            newHead?.next = nodeHead
+            return newHead
+        }
     }
 
 }
@@ -155,10 +168,11 @@ fun main() {
     var nodeHead = ListNode(node3)
 //    SwapNodesInPairs.swapNode(nodeHead)
 //    SwapNodesInPairs.swapNode2(nodeHead)
-    SwapNodesInPairs.swapNode3(nodeHead)
-//    ListNode.printNode(nodeHead)
+//    SwapNodesInPairs.swapNode3(nodeHead)
+    ListNode.printNode(nodeHead)
 //    val result = SwapNodesInPairs.swapNodeRecursive(nodeHead)
 //    val result = SwapNodesInPairs.swapNodeRecursive2(nodeHead)
-//    ListNode.printNode(result)
+    val result = SwapNodesInPairs.swapNodeRecursive3(nodeHead)
+    ListNode.printNode(result)
 
 }
