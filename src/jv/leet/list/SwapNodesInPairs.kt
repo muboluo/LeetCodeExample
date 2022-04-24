@@ -114,6 +114,35 @@ class SwapNodesInPairs {
             return newHead
 
         }
+
+        fun swapNode3(nodeHead: ListNode?): ListNode? {
+            // 两两分株，改变 next 指向
+            // 前一组的 next  -> node2, node2 -> node1, node1 -> 下一组
+            ListNode.printNode(nodeHead)
+
+            if (nodeHead == null) {
+                return null
+            }
+
+            var dummyHead = ListNode(nodeHead)
+            var temp = dummyHead
+
+            while (temp.next != null && temp.next?.next != null) {
+                var node1 = temp.next
+                var node2 = temp.next?.next
+
+                temp.next = node2
+                node1?.next = node2?.next
+                node2?.next = node1
+
+                if (node1 != null) {
+                    temp = node1
+                }
+            }
+
+            ListNode.printNode(dummyHead.next)
+            return dummyHead.next
+        }
     }
 
 }
@@ -126,9 +155,10 @@ fun main() {
     var nodeHead = ListNode(node3)
 //    SwapNodesInPairs.swapNode(nodeHead)
 //    SwapNodesInPairs.swapNode2(nodeHead)
-    ListNode.printNode(nodeHead)
+    SwapNodesInPairs.swapNode3(nodeHead)
+//    ListNode.printNode(nodeHead)
 //    val result = SwapNodesInPairs.swapNodeRecursive(nodeHead)
-    val result = SwapNodesInPairs.swapNodeRecursive2(nodeHead)
-    ListNode.printNode(result)
+//    val result = SwapNodesInPairs.swapNodeRecursive2(nodeHead)
+//    ListNode.printNode(result)
 
 }
