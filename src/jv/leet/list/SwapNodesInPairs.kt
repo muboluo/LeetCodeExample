@@ -151,8 +151,11 @@ class SwapNodesInPairs {
                 return nodeHead
             }
             // handle current level
+            // newHead -> 2 4 6 8
             val newHead = nodeHead?.next
+            // nodeHead -> 1 3 5 7, 交换后，指向下一层
             nodeHead.next = swapNodeRecursive3(newHead?.next)
+            // 交换后，指向 1 3 5 7
             newHead?.next = nodeHead
             return newHead
         }
