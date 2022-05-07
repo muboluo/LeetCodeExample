@@ -46,6 +46,20 @@ class ReverseList {
             return pre
         }
 
+        fun reverseList4(head: ListNode?): ListNode? {
+            var pre: ListNode? = null
+            var cur = head
+
+            while (cur != null) {
+                var next = cur.next
+                cur.next = pre
+                pre = cur
+                cur = next
+            }
+
+            return pre
+        }
+
         fun reverseList3(head: ListNode): ListNode? {
             var pre: ListNode? = null
             var cur: ListNode? = head
@@ -78,6 +92,32 @@ class ReverseList {
                 // 取出当前节点的value，复制给next 节点。
                 next = ListNode(next, cur.value)
                 cur = cur.next
+            }
+            return next
+        }
+
+        fun reverseListMethod23(head: ListNode): ListNode? {
+
+            var next: ListNode? = null
+            var current: ListNode? = head
+
+            while (current != null) {
+                // 取出当前的 value 和 需要指向的next， 存储至 next 中
+                next = ListNode(next, current.value)
+                current = current.next
+            }
+
+            return next
+        }
+
+        fun reverseListMethod24(head: ListNode): ListNode? {
+            // set first next
+            var next: ListNode? = null
+            var current: ListNode? = head
+
+            while (current != null) {
+                next = ListNode(next, current.value)
+                current = current.next
             }
             return next
         }
