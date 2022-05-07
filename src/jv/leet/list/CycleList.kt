@@ -1,4 +1,5 @@
 package jv.leet.list
+
 /**
  * 环形链表
  * 给你一个链表的头结点head,判断链表中是否有环。
@@ -23,6 +24,34 @@ fun cycle(node: ListNode?): Boolean {
         if (fast == slow) {
             return true
         }
+        slow = slow?.next
+    }
+
+    return false
+}
+
+fun cycle2(node: ListNode?): Boolean {
+
+    if (node == null) {
+        return false
+    }
+
+    var fast = node
+    var slow = node
+
+    while (fast != null) {
+        fast = fast.next
+        if (fast == null) {
+            return false
+        }
+        fast = fast.next
+        if (fast == null) {
+            return false
+        }
+        if (fast == slow) {
+            return true
+        }
+
         slow = slow?.next
     }
 
