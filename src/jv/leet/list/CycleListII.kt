@@ -66,6 +66,58 @@ fun cycleIIHashSet1(head: ListNode?): ListNode? {
     return null
 }
 
+// 快慢指针法， 通过算法，得知 当 fast & slow 相遇时，再从head 出发第三个节点。会在 圆环起点相遇
+fun cycleIIFastSlow2(head: ListNode?): ListNode? {
+
+    if (head == null) {
+        return null
+    }
+    var fast = head
+    var slow = head
+
+    while (fast != null) {
+
+        slow = slow?.next
+
+        if (fast.next == null) {
+            return null
+        }
+        fast = fast.next?.next
+
+        if (fast == slow) {
+            var third = head
+            while (third != slow) {
+                third = third?.next
+                slow = slow?.next
+            }
+            return third
+        }
+    }
+    return null
+}
+
+// 使用 hashSet 的方法进行处理
+fun cycleIIHashSet2(head: ListNode?): ListNode? {
+    if (head == null) {
+        return null
+    }
+    val set :MutableSet<ListNode?> = mutableSetOf()
+    var current = head
+    while (current != null) {
+        if (set.contains(current)) {
+            return current
+        }
+        set.add(current)
+        current = current.next
+    }
+    return null
+}
+
 fun main() {
+
+    cycleIIFastSlow1(null)
+    cycleIIFastSlow2(null)
+    cycleIIHashSet1(null)
+    cycleIIHashSet2(null)
 
 }
