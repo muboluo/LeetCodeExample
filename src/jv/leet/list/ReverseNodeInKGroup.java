@@ -109,7 +109,7 @@ public class ReverseNodeInKGroup {
 
                 ListNode second = first.getNext();
                 first.setNext(preFirst);
-                
+
                 preFirst = first;
                 first = second;
             }
@@ -126,6 +126,51 @@ public class ReverseNodeInKGroup {
 
         return hair.getNext();
 
+    }
+
+    // 分3步： 1 找到当前第 n 组 ，以及 前一个，后一个，  2 翻转 第 n 组， 3 将 第 n 组 接回去
+    public ListNode reverse3(ListNode head, int k) {
+
+        ListNode hair = new ListNode();
+        hair.setNext(head);
+
+        ListNode preHead = hair;
+        while (head != null) {
+
+            ListNode headInGroup = head;
+            for (int i = 0; i < k; i++) {
+                head = head.getNext();
+                if (head == null) {
+                    return hair.getNext();
+                }
+            }
+
+            ListNode tailInGroup = head;
+            ListNode tailNext = tailInGroup.getNext();
+
+            // 取 翻转后 当前 node next 的 初始值, 第一个位置，指向的 next 是 下一个group 的开始位置
+            ListNode preFirst = tailInGroup.getNext();
+            ListNode first = headInGroup;
+
+            while (preFirst != tailInGroup) {
+
+                ListNode second = first.getNext();
+                first.setNext(preFirst);
+                preFirst = first;
+                first = second;
+            }
+
+            ListNode newHeadInGroup = tailInGroup;
+            ListNode newTailInGroup = headInGroup;
+
+            preHead.setNext(newHeadInGroup);
+            newTailInGroup.setNext(tailNext);
+
+            // jump next level
+            preHead = newTailInGroup;
+            head = tailNext;
+        }
+        return hair.getNext();
     }
 
 
