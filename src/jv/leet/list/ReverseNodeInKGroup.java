@@ -5,9 +5,13 @@ package jv.leet.list;
  * https://leetcode.cn/problems/reverse-nodes-in-k-group/solution/k-ge-yi-zu-fan-zhuan-lian-biao-by-leetcode-solutio/
  * <p/>
  * 3个步骤
+ * <p/>
  * 1. 找到每组的队首队尾，和 队首.pre , 队尾.next
+ * <p></p>
  * 2. 将该组拆出来，进行翻转
+ * <p></p>
  * 3. 将翻转后的 队列接回去
+ * <p></p>
  * 注意，其中涉及到一些状态保存。
  */
 public class ReverseNodeInKGroup {
