@@ -9,9 +9,9 @@ import jv.leet.list.ListNode;
  * <p></p>
  * 解题思路：
  * <p></p>
- * 解法1：递归。比较并且返回， 二者中，更小的那个。如果是null， 则说明该list 到最后一个节点了。返回另一个节点即可。
+ * 解法1： 递归。比较并且返回， 二者中，更小的那个。如果是null， 则说明该list 到最后一个节点了。返回另一个节点即可。
  * <p></p>
- * 解法2：
+ * 解法2： 迭代。
  */
 public class Merge2SortedList {
 
@@ -49,11 +49,55 @@ public class Merge2SortedList {
 
     }
 
-    private static void merge21(ListNode head1, ListNode head2) {
+    // 迭代 1
+    private static ListNode merge21(ListNode head1, ListNode head2) {
+
+        ListNode hair = new ListNode(null, "-1");
+
+        ListNode preHead = hair;
+
+        while (head1 != null && head2 != null) {
+
+            if (Integer.parseInt(head1.getValue()) < Integer.parseInt(head2.getValue())) {
+                preHead.setNext(head1);
+                head1 = head1.getNext();
+            } else {
+                preHead.setNext(head2);
+                head2 = head2.getNext();
+            }
+            preHead = preHead.getNext();
+
+        }
+        preHead.setNext(head1 == null ? head2 : head1);
+
+        return hair.getNext();
 
     }
 
-    private static void merge22(ListNode head1, ListNode head2) {
+    // 迭代
+    private static ListNode merge22(ListNode head1, ListNode head2) {
+
+        ListNode hair = new ListNode(null, "-1");
+
+        ListNode preHead = hair;
+
+        while (head1 != null && head2 != null) {
+
+            if (Integer.parseInt(head1.getValue()) < Integer.parseInt(head2.getValue())) {
+
+                preHead.setNext(head1);
+                head1 = head1.getNext();
+            } else {
+                preHead.setNext(head2);
+                head2 = head2.getNext();
+            }
+            preHead = preHead.getNext();
+        }
+
+        // while 完之后，最多 只有 一个 list 不为空
+        preHead.setNext(head1 == null ? head2 : head1);
+
+        return hair.getNext();
 
     }
 
@@ -75,9 +119,13 @@ public class Merge2SortedList {
 //        ListNode result = merge11(node11, node21);
 //        ListNode.Companion.printNode(result);
 
-        ListNode result2 = merge12(node11, node21);
-        ListNode.Companion.printNode(result2);
+//        ListNode result2 = merge12(node11, node21);
+//        ListNode.Companion.printNode(result2);
 
+//        ListNode result3 = merge21(node11, node21);
+//        ListNode.Companion.printNode(result3);
+        ListNode result4 = merge21(node11, node21);
+        ListNode.Companion.printNode(result4);
 
     }
 }
