@@ -9,7 +9,7 @@ import jv.leet.list.ListNode;
  * <p></p>
  * 解题思路：
  * <p></p>
- * 解法1： 递归。比较并且返回， 二者中，更小的那个。如果是null， 则说明该list 到最后一个节点了。返回另一个节点即可。
+ * 解法1： 递归。比较并且返回， 二者中更小的那个。如果是null， 则说明该list 到最后一个节点了。返回另一个节点即可。
  * <p></p>
  * 解法2： 迭代。
  */
@@ -101,6 +101,50 @@ public class Merge2SortedList {
 
     }
 
+    // 递归 3
+    public static ListNode merge31(ListNode head1, ListNode head2) {
+
+        if (head1 == null) {
+            return head2;
+        } else if (head2 == null) {
+            return head1;
+        } else if (Integer.parseInt(head1.getValue()) < Integer.parseInt(head2.getValue())) {
+            head1.setNext(merge31(head1.getNext(), head2));
+            return head1;
+        } else {
+            head2.setNext(merge31(head1, head2.getNext()));
+            return head2;
+        }
+
+    }
+
+    // 迭代
+    public static ListNode merge32(ListNode head1, ListNode head2) {
+
+        ListNode hair = new ListNode(null, "-1");
+
+        ListNode preHead = hair;
+
+        while (head1 != null && head2 != null) {
+
+            if (Integer.parseInt(head1.getValue()) < Integer.parseInt(head2.getValue())) {
+                preHead.setNext(head1);
+                head1 = head1.getNext();
+            } else {
+                preHead.setNext(head2);
+                head2 = head2.getNext();
+            }
+
+            preHead = preHead.getNext();
+        }
+        // 当前最多有一个不为空
+
+        preHead.setNext(head1 != null ? head1 : head2);
+
+        return hair.getNext();
+
+    }
+
 
     public static void main(String[] args) {
 
@@ -124,8 +168,13 @@ public class Merge2SortedList {
 
 //        ListNode result3 = merge21(node11, node21);
 //        ListNode.Companion.printNode(result3);
-        ListNode result4 = merge21(node11, node21);
-        ListNode.Companion.printNode(result4);
+//        ListNode result4 = merge21(node11, node21);
+//        ListNode.Companion.printNode(result4);
 
+        String[] list1 = new String[]{"1", "3", "4", "6", "8"};
+        String[] list2 = new String[]{"2", "5", "7", "10"};
+        ListNode result6 = merge32(ListNode.Companion.createListNodeList(list1), ListNode.Companion.createListNodeList(list2));
+
+        ListNode.Companion.printNode(result6);
     }
 }
