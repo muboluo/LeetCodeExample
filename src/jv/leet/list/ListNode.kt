@@ -13,5 +13,22 @@ class ListNode(var next: ListNode? = null, var value: String = "") {
             }
             System.out.println("-----------")
         }
+
+        fun createListNodeList(valueList: Array<String>): ListNode? {
+
+            var hair: ListNode? = ListNode(null, "-1")
+
+            var preHead: ListNode? = hair
+
+
+            for (value in valueList) {
+                preHead?.next = ListNode(null, value)
+                preHead = preHead?.next
+
+            }
+
+            return hair?.next
+
+        }
     }
 }
