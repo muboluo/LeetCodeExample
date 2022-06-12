@@ -174,7 +174,52 @@ public class Merge2SortedList {
         String[] list1 = new String[]{"1", "3", "4", "6", "8"};
         String[] list2 = new String[]{"2", "5", "7", "10"};
         ListNode result6 = merge32(ListNode.Companion.createListNodeList(list1), ListNode.Companion.createListNodeList(list2));
-
         ListNode.Companion.printNode(result6);
+
+        ListNode result7 = merge14(ListNode.Companion.createListNodeList(list1), ListNode.Companion.createListNodeList(list2));
+        ListNode.Companion.printNode(result7);
+
+        ListNode result8 = merge24(ListNode.Companion.createListNodeList(list1), ListNode.Companion.createListNodeList(list2));
+        ListNode.Companion.printNode(result8);
+
+    }
+
+    private static ListNode merge24(ListNode head1, ListNode head2) {
+
+        ListNode hair = new ListNode(null, "-1");
+
+        ListNode preHead = hair;
+
+        while (head1 != null && head2 != null) {
+
+            if (Integer.parseInt(head1.getValue()) < Integer.parseInt(head2.getValue())) {
+
+                preHead.setNext(head1);
+
+                head1 = head1.getNext();
+            } else {
+                preHead.setNext(head2);
+                head2 = head2.getNext();
+            }
+            preHead = preHead.getNext();
+        }
+
+        preHead.setNext(head1 == null ? head2: head1);
+
+        return hair.getNext();
+    }
+
+    private static ListNode merge14(ListNode head1, ListNode head2) {
+        if (head1 == null) {
+            return head2;
+        } else if (head2 == null) {
+            return head1;
+        } else if (Integer.parseInt(head1.getValue()) < Integer.parseInt(head2.getValue())) {
+            head1.setNext(merge14(head1.getNext(), head2));
+            return head1;
+        } else {
+            head2.setNext(merge14(head1, head2.getNext()));
+            return head2;
+        }
     }
 }
