@@ -177,7 +177,56 @@ public class ReverseNodeInKGroup {
         return hair.getNext();
     }
 
+    // 分3步： 1.找到当前第 n 组， 及 前一个 后一个。 2. 翻转当前组。 3 将第 n 组 接回之前的数组
+    public ListNode reverse4(ListNode head, int k) {
 
+        ListNode hair = new ListNode();
+        hair.setNext(head);
+
+        // set first preHead
+        ListNode preHead = hair;
+
+        while (head != null) {
+
+            ListNode headInGroup = head;
+
+            for (int i = 0; i < k; i++) {
+                head = head.getNext();
+                if (head == null) {
+                    return hair.getNext();
+                }
+            }
+
+            ListNode tailInGroup = head;
+
+            ListNode tailNext = head.getNext();
+
+            // 翻转 当前  list
+            ListNode preFirst = tailInGroup.getNext();
+            ListNode first = headInGroup;
+
+            while (preFirst != tailInGroup) {
+
+                ListNode second = first.getNext();
+                first.setNext(preFirst);
+                preFirst = first;
+                first = second;
+
+            }
+
+            ListNode newHeadInGroup = tailInGroup;
+            ListNode newTailInGroup = headInGroup;
+
+            preHead.setNext(newHeadInGroup);
+            newTailInGroup.setNext(tailNext);
+
+            // jump next level
+            preHead = newTailInGroup;
+            head = tailNext;
+        }
+
+        return hair.getNext();
+    }
     public static void main(String[] args) {
 
 
