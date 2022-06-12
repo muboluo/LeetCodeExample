@@ -7,7 +7,7 @@ import java.util.*
  *
  * https://leetcode.cn/problems/valid-parentheses/
  *
- * 解法1： 入栈，出栈
+ * 解法： 入栈，出栈
  *
  */
 class ValidBrackets {
@@ -72,6 +72,34 @@ class ValidBrackets {
             return stack.isEmpty()
         }
 
+        fun valid13(s: String?): Boolean {
+
+            if (s == null || s.isEmpty()) {
+                return false
+            }
+
+            var stack = Stack<Char>()
+
+            for (c in s.toCharArray()) {
+
+                if (c == '{') {
+
+                    stack.push('}')
+
+                } else if (c == '(') {
+
+                    stack.push(')')
+                } else if (c == '[') {
+
+                    stack.push(']')
+                } else if (stack.isEmpty() || c != stack.pop()) {
+                    return false
+                }
+            }
+            return stack.empty()
+
+        }
+
     }
 }
 
@@ -82,5 +110,8 @@ fun main() {
 
     System.out.println(ValidBrackets.valid12("{{{}}}(())[][]"))
     System.out.println(ValidBrackets.valid12("{{{}}}(())[]["))
+
+    System.out.println(ValidBrackets.valid13("{{{}}}(())[][]"))
+    System.out.println(ValidBrackets.valid13("{{{}}}(())[]["))
 
 }
