@@ -3,7 +3,7 @@ package jv.leet.array;
 import java.util.Arrays;
 
 /**
- * 旋转数组
+ * 根据第 K 个旋转数组
  * <p>
  * https://leetcode.cn/problems/rotate-array/
  * <p>
@@ -17,7 +17,7 @@ import java.util.Arrays;
  * <p>
  * 先整个列表翻转，然后再以k为分界，分成两个部分。单独进行翻转。
  */
-public class RotateArray {
+public class RotateArrayByIndexK {
 
     public static void rotate11(int[] nums, int k) {
 
@@ -40,7 +40,7 @@ public class RotateArray {
         }
 
         System.arraycopy(newArray, 0, array, 0, n);
-
+        System.out.println(Arrays.toString(array));
     }
 
     public static void rotate21(int[] array, int k) {
@@ -99,8 +99,59 @@ public class RotateArray {
 
         rotate11(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 4);
         rotate12(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 4);
+        rotate13(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 4);
         rotate21(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 4);
         rotate22(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 4);
+        rotate23(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 4);
+    }
+
+    private static void rotate13(int[] ints, int k) {
+
+        if (ints == null || ints.length <= 0 || ints.length < k) {
+            return;
+        }
+
+        int[] newInts = new int[ints.length];
+
+        for (int i = 0; i < ints.length; i++) {
+            newInts[(i + k) % ints.length] = ints[i];
+        }
+
+        System.arraycopy(newInts, 0, ints, 0, ints.length);
+        System.out.println(Arrays.toString(ints));
+    }
+
+    private static void rotate23(int[] nums, int k) {
+
+        if (nums == null || nums.length <= 0 || nums.length < k) {
+            return;
+
+        }
+
+        reverse23(0, nums.length - 1, nums);
+        reverse23(0, k - 1, nums);
+        reverse23(k, nums.length - 1, nums);
+
+        System.out.println(Arrays.toString(nums));
+    }
+
+    private static void reverse23(int start, int end, int[] nums) {
+
+        if (nums == null || nums.length <= 0) {
+            return;
+        }
+
+        while (start < end) {
+
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+
+            start++;
+            end--;
+        }
+
+
     }
 }
 
