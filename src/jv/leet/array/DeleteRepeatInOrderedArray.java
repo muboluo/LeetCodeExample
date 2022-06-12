@@ -69,11 +69,38 @@ public class DeleteRepeatInOrderedArray {
 
     }
 
+    private static int deleteRepeat4(int[] nums) {
+
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int slow = 0, fast = 1;
+        while (fast < nums.length) {
+
+            if (nums[fast] != nums[slow]) {
+                nums[slow + 1] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+
+        for (int i = slow + 1; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+
+        System.out.println(Arrays.toString(nums));
+        return slow;
+
+    }
+
     public static void main(String[] args) {
 
         deleteRepeat(new int[]{0, 1, 2, 3, 4, 5, 5, 5, 6, 7, 7, 9});
         deleteRepeat2(new int[]{0, 1, 2, 3, 4, 5, 5, 5, 6, 7, 7, 9});
         deleteRepeat3(new int[]{0, 1, 2, 3, 4, 5, 5, 5, 6, 7, 7, 9});
+        deleteRepeat4(new int[]{0, 1, 2, 3, 4, 5, 5, 5, 6, 7, 7, 9});
 
     }
+
 }
