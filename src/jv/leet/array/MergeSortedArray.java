@@ -50,6 +50,17 @@ public class MergeSortedArray {
         Arrays.sort(array1);
     }
 
+    // 暴力破解法 - 第四遍  (m+n)log(m+n)
+    public static void merge14(int[] array1, int validLength1, int[] array2, int validLength2) {
+
+        for (int i = 0; i < validLength2; i++) {
+            array1[validLength1 + i] = array2[i];
+        }
+
+        Arrays.sort(array1);
+
+    }
+
     // 正向 双指针 时间/空间 m+n
     public static void merge21(int[] array1, int validLength1, int[] array2, int validLength2) {
 
@@ -135,6 +146,35 @@ public class MergeSortedArray {
         }
     }
 
+    // 正向双指针 4  m + n
+    public static void merge24(int[] array1, int validLength1, int[] array2, int validLength2) {
+
+        int[] sorted = new int[validLength1 + validLength2];
+
+        int i1 = 0, i2 = 0;
+
+        int cur;
+        while (i1 < validLength1 || i2 < validLength2) {
+
+            if (i1 >= validLength1) {
+                cur = array2[i2++];
+            } else if (i2 >= validLength2) {
+                cur = array1[i1++];
+            } else if (array1[i1] < array2[i2]) {
+                cur = array1[i1++];
+            } else {
+                cur = array2[i2++];
+            }
+
+            sorted[i1 + i2 - 1] = cur;
+        }
+
+        for (int i = 0; i < sorted.length; i++) {
+            array1[i] = sorted[i];
+        }
+
+    }
+
     // 反向 双指针法
     public static void merge31(int[] array1, int validLength1, int[] array2, int validLength2) {
 
@@ -190,6 +230,31 @@ public class MergeSortedArray {
 
     // 逆向 双指针法， 时间 m+n , 空间 1
     public static void merge33(int[] array1, int validLength1, int[] array2, int validLength2) {
+
+        int i1 = validLength1 - 1, i2 = validLength2 - 1;
+
+        int tail = validLength1 + validLength2 - 1;
+
+        int cur;
+
+        while (i1 >= 0 || i2 >= 0) {
+
+            if (i1 < 0) {
+                cur = array2[i2--];
+            } else if (i2 < 0) {
+                cur = array1[i1--];
+            } else if (array1[i1] < array2[i2]) {
+                cur = array1[i1--];
+            } else {
+                cur = array2[i2--];
+            }
+            array1[tail--] = cur;
+        }
+    }
+
+
+    // 逆向 双指针， 时间 m +n , 空间 1
+    public static void merge34(int[] array1, int validLength1, int[] array2, int validLength2) {
 
         int i1 = validLength1 - 1, i2 = validLength2 - 1;
 
