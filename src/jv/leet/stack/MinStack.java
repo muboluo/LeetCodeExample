@@ -3,13 +3,15 @@ package jv.leet.stack;
 import java.util.Stack;
 
 /**
- * 最小栈
+ * 最小栈: https://leetcode.cn/problems/min-stack/
  * <p></p>
  * 两种方法，
  * <p></p>
  * 方法1： 使用两个栈来记， 一个栈记录入栈的数字，另一个栈记录当前最小值
  * <p></p>
  * 方法2： 使用一个栈 + 当前最小值记录， 栈中记录当前最小值与前一个数的差值。
+ * <p></p>
+ * 方法3： 使用链表实现 国外高赞答案
  */
 public class MinStack {
 
