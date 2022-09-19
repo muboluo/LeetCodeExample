@@ -9,9 +9,9 @@ public class MinStack2 {
     public void push(int val) {
 
         if (head == null) {
-            head = new Node(val, val);
+            head = new Node(val, val, null);
         } else {
-            head = new Node(val, val, head);
+            head = new Node(val, Math.min(val, head.min), head);
         }
     }
 
@@ -26,24 +26,20 @@ public class MinStack2 {
     }
 
     public int top() {
-        return head != null ? head.x : 0;
+        return head != null ? head.val : 0;
     }
 
 
     public static class Node {
 
-        int x;
+        int val;
         int min;
         Node next;
 
-        public Node(int x, int min, Node next) {
-            this.x = x;
+        public Node(int val, int min, Node next) {
+            this.val = val;
             this.min = min;
             this.next = next;
-        }
-
-        public Node(int x, int min) {
-            this(x, min, null);
         }
     }
 }
