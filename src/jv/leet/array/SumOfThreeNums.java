@@ -32,14 +32,75 @@ class SumOfThreeNums {
 
     public static void main(String[] args) {
 
-        threeSum(new int[]{-1, 0, 1, 2, -1, -4});
-        System.out.println("-------------");
-        threeSum2(new int[]{-1, 0, 1, 2, -1, -4});
-        System.out.println("-------------");
-        threeSum3(new int[]{-1, 0, 1, 2, -1, -4});
-        System.out.println("-------------");
-        threeSum4(new int[]{-1, 0, 1, 2, -1, -4});
-        System.out.println("-------------");
+        threeSum(new int[]{-1, 0, 1, 2, -1, -4, 4,5});
+        System.out.println("1-------------");
+        threeSum2(new int[]{-1, 0, 1, 2, -1, -4,4, 5});
+        System.out.println("2-------------");
+        threeSum3(new int[]{-1, 0, 1, 2, -1, -4,4, 5});
+        System.out.println("3-------------");
+        threeSum4(new int[]{-1, 0, 1, 2, -1, -4,4,5});
+        System.out.println("4-------------");
+
+        threeSum5(new int[]{-1, 0, 1, 2, -1, -4, 4, 5});
+    }
+
+    private static List<int[]> threeSum5(int[] nums) {
+        // set terminal
+        if (nums == null || nums.length < 3) {
+            return new ArrayList<>(0);
+        }
+
+        // sort
+        Arrays.sort(nums);
+
+        // init var
+        int m = 0, r = nums.length-1;
+
+        List<int[]> result = new ArrayList<>();
+        // for
+        for (int l = 0; l < nums.length; l++) {
+
+            // set terminal ,jump next level
+            if (nums[l] > 0) {
+                break;
+            }
+
+            // 处理多余的 case
+            if (l > 0 && nums[l] == nums[l - 1]) {
+                continue;
+            }
+
+            m = l + 1;
+            while (m < r) {
+
+                int sum = nums[l] + nums[m] + nums[r];
+                if (sum == 0) {
+                    result.add(new int[]{nums[l], nums[m], nums[r]});
+
+                    while (m < r && nums[m] == nums[m + 1]) {
+                        m++;
+                    }
+
+                    while (m < r && nums[r] == nums[r - 1]) {
+                        r--;
+                    }
+
+                    m++;
+                    r--;
+
+                } else if (sum > 0) {
+                    r--;
+                } else {
+                    l++;
+                }
+
+            }
+
+            // jump next level
+        }
+
+        return result;
+
     }
 
     private static List<List<Integer>> threeSum4(int[] nums) {
