@@ -19,15 +19,20 @@ class SumOf2Num {
 
     public static int[] twoSum(int[] nums, int target) {
 
-        Map<Integer, Integer> resultMap = new HashMap();
+        if (nums == null || nums.length == 0) {
+            return new int[]{-1, -1};
+        }
 
-        for (int i = 0; i < nums.length; ++i) {
-            final int another_num = target - nums[i];
+        Map<Integer, Integer> valueIndexMap = new HashMap<>();
 
-            if (resultMap.containsKey(another_num)) {
-                return new int[]{resultMap.get(another_num), i};
+
+        for (int i = 0; i < nums.length; i++) {
+            int anotherValue = target - nums[i];
+            if (valueIndexMap.containsKey(anotherValue)) {
+                return new int[]{i, valueIndexMap.get(anotherValue)};
+            } else {
+                valueIndexMap.put(nums[i], i);
             }
-            resultMap.put(nums[i], i);
         }
 
         return new int[]{-1, -1};
