@@ -81,6 +81,29 @@ fun cycle3(head: ListNode?): Boolean {
     return false
 }
 
+fun cycle4(head: ListNode?): Boolean {
+
+    if (head == null) {
+        return false;
+    }
+
+    var slow = head
+    var fast = head.next
+
+    while (fast?.next != null) {
+
+        if (fast == slow) {
+            return true
+        }
+
+        fast = fast.next?.next
+        slow = slow?.next
+    }
+
+    return false;
+}
+
+
 fun main() {
 
     val node1 = ListNode()

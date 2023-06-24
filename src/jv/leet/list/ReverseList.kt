@@ -69,7 +69,25 @@ class ReverseList {
                 pre = cur
                 cur = next
             }
-            return cur
+            return pre
+        }
+
+        fun reverseList5(head: ListNode?): ListNode? {
+
+            var pre : ListNode? = null
+            var current : ListNode? = head
+
+            while (current != null) {
+
+                val temp : ListNode? = current.next
+
+                current.next = pre
+                pre = current
+                current = temp
+            }
+
+
+            return pre
         }
 
         fun reverseListMethod2(head: ListNode): ListNode? {
