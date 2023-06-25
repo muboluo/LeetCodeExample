@@ -47,37 +47,35 @@ public class ReverseNodeInKGroup2 {
 
         ListNode preHead = new ListNode(-1);
         preHead.next = node;
-        // 每组数据遍历时，该组数据之前的一项。
+        //遍历 当前组数据的前一项
         ListNode preHeadByGroup = preHead;
+
         int n = k;
 
         while (preHeadByGroup.next != null) {
 
-            // 因为在后面需要处理队尾和队首，所以需要一个临时变量，记录队尾。
-            ListNode tempNode = preHeadByGroup;
+            ListNode temp = preHeadByGroup;
 
-            while (n > 0 && tempNode.next != null) {
-                tempNode = tempNode.next;
+            while (n > 0 && temp.next != null) {
+                temp = temp.next;
                 n--;
             }
 
-            // 如果遍历完成
             if (n == 0) {
-                ListNode nextWhileNode = tempNode.next;
-                // 在翻转钱的头部数据 = 翻转后的尾部数据。
-                ListNode tailInGroupAfterReverse = preHeadByGroup.next;
-                // 先断开旧数据
-                tempNode.next = null;
-                preHeadByGroup.next = reverseNode(tailInGroupAfterReverse);
-                tailInGroupAfterReverse.next = nextWhileNode;
+
+                ListNode headInNextGroup = temp.next;
+                ListNode tailAfterReverseInGroup = preHeadByGroup.next;
+
+                temp.next = null;
+
+                preHeadByGroup.next = reverseNode(tailAfterReverseInGroup);
+                tailAfterReverseInGroup.next = headInNextGroup;
+                preHeadByGroup = tailAfterReverseInGroup;
                 n = k;
-                preHeadByGroup = tailInGroupAfterReverse;
 
             } else {
-                // 已经到达队尾
                 break;
             }
-
         }
 
         return preHead.next;
