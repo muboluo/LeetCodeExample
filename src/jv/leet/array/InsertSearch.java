@@ -3,6 +3,7 @@ package jv.leet.array;
 /**
  * 插值查找原理介绍
  * <p>
+ * https://blog.csdn.net/qq_44236958/article/details/110949481
  * 插值查找法类似于二分查找法,不同的是插值查找每次从自适应mid处开始查找
  * <p>
  * 将折半查找中的求 mid索引的公式,low表示左边索引left,high表示右边索引right
