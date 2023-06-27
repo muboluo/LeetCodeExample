@@ -2,6 +2,8 @@ package jv.leet.sort;
 
 // 堆排序
 
+import sun.security.util.Length;
+
 import java.util.Arrays;
 
 /**
@@ -22,12 +24,69 @@ import java.util.Arrays;
  * <p>
  * 重复步骤 2，直到堆的尺寸为 1。
  */
-public class Heap {
+public class HeapSort {
 
     public static void main(String[] args) {
 
     }
 
+    private int[] sort2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return nums;
+        }
+        // 是否改变原数组
+
+        // build Max on Top heap
+        int len = nums.length;
+        buildMaxOnTopHeap(nums, len);
+
+        // change top ,rebuild max on top
+        for (int i = len - 1; i > 0; i--) {
+
+            swap(nums, i, 0);
+            len--;
+            heapify2(nums, 0, len);
+        }
+
+        return nums;
+    }
+
+    private void buildMaxOnTopHeap(int[] nums, int len) {
+        if (nums == null) {
+            return;
+        }
+
+        for (int i = nums.length / 2; i >= 0; i--) {
+            heapify2(nums, i, len);
+        }
+    }
+
+    private void heapify2(int[] nums, int i, int len) {
+
+        int leftIndex = i * 2 + 1;
+        int rightIndex = i * 2 + 2;
+        int maxIndex = i;
+
+        if (leftIndex < len && nums[leftIndex] > nums[maxIndex]) {
+            maxIndex = leftIndex;
+        }
+
+        if (rightIndex < len && nums[rightIndex] > nums[maxIndex]) {
+            maxIndex = rightIndex;
+        }
+
+        if (maxIndex != i) {
+            swap(nums, maxIndex, i);
+            heapify2(nums, maxIndex, len);
+        }
+
+    }
+
+    // 程序入口
+    // 构建 max on top 的 堆
+    // 从 n/2 开始，逐步递减进行查找。
+    //      涉及到了递归
+    //
     private static int[] sort(int[] nums) {
 
         if (nums == null || nums.length < 2) {
@@ -38,10 +97,10 @@ public class Heap {
 
         int len = result.length;
 
+        // 创建最大数在最顶部的堆
         buildMaxHeap(result, len);
 
         // 创建完成之后，只是最大值是有序的，还需要调整底部的顺序。
-
         for (int i = len - 1; i > 0; i--) {
 
             swap(nums, 0, i);
@@ -73,6 +132,7 @@ public class Heap {
         }
         if (largestIndex != i) {
             swap(nums, i, largestIndex);
+            // 更新最大数的坐标之后，查找 以该坐标为 top 的所有子项的 最大数
             heapify(nums, largestIndex, len);
         }
     }

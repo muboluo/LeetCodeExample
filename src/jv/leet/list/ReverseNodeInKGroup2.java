@@ -1,5 +1,13 @@
 package jv.leet.list;
 
+/**
+ * 定义头部 preHead 和每组的头部数据 groupPreHead
+ * k 个一组遍历数据
+ * 翻转前，确定 上组数据的尾部和下组数据的头部
+ * 翻转过程中，定义 pre 和 cur 两个临时变量辅助
+ * 翻转后拼接起来
+ * 返回 preHead.
+ */
 public class ReverseNodeInKGroup2 {
 
     public static void main(String[] args) {

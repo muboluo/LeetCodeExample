@@ -17,10 +17,58 @@ import java.util.Arrays;
  * 根据 pivot ，找到分隔前后两个数组的 index
  * 交换 两个指定 index 的 值
  */
-public class Quick {
+public class QuickSort {
 
     public static void main(String[] args) {
 
+    }
+
+    public int[] sort2(int[] nums) {
+
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+
+        int[] array = Arrays.copyOf(nums, nums.length);
+
+        return quickSort2(array, 0, array.length - 1);
+    }
+
+    private int[] quickSort2(int[] array, int left, int right) {
+
+        if (array != null && left < right && right < array.length) {
+
+            int pivotIndex = partition2(array, left, right);
+            quickSort2(array, left, pivotIndex - 1);
+            quickSort2(array, pivotIndex + 1, right);
+
+        }
+        return array;
+    }
+
+    private int partition2(int[] array, int leftIndex, int rightIndex) {
+        int pivot = leftIndex;
+        int curIndex = leftIndex + 1;
+
+        for (int i = leftIndex; i <= rightIndex; i++) {
+
+            if (array[pivot] > array[i]) {
+                swap2(array, curIndex, i);
+                curIndex++;
+            }
+        }
+        swap2(array, pivot, curIndex - 1);
+
+        return curIndex - 1;
+    }
+
+    private void swap2(int[] array, int left, int right) {
+
+        if (array != null && left < array.length && right < array.length) {
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+        }
     }
 
     public int[] sort(int[] sourceArray) {

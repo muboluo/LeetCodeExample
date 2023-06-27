@@ -19,8 +19,7 @@ public class SearchInsertPosition {
         // for each
         while (left < right) {
 
-            int middle = left + (right - left) / 2;
-
+            int middle = left + (right - left) * (target - numbers[left]) / (numbers[right] - numbers[left]);
             if (target < numbers[middle]) {
                 right = middle - 1;
             } else if (target > numbers[middle]) {
