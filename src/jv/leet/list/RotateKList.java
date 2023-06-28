@@ -11,6 +11,48 @@ public class RotateKList {
 
     }
 
+    // 第二遍
+    private static ListNode rotate2(ListNode head, int k) {
+
+        if (head == null || k <= 0) {
+            return head;
+        }
+
+        ListNode preHead = new ListNode(-1);
+        preHead.next = head;
+        ListNode cur = preHead;
+        ListNode fast = preHead;
+        ListNode slow = preHead;
+
+        int count = 0;
+        while (cur.next != null) {
+            cur = cur.next;
+            count++;
+        }
+
+        if (k % count == 0) {
+            return head;
+        }
+
+        k = k % count;
+
+        while (k > 0) {
+            fast = fast.next;
+            k--;
+        }
+
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        fast.next = preHead.next;
+        preHead.next = slow.next;
+        slow.next = null;
+
+        return preHead.next;
+    }
+
     private static ListNode rotate(ListNode head, int k) {
 
         if (head == null || head.next == null || k <= 0) {
@@ -38,7 +80,7 @@ public class RotateKList {
         // 重新计算 k
         k = k % count;
 
-        // 移动fast 到 k 位置处
+        // 移动fast 到 k 位置处，k 表示 fast 和 slow 之间的间隔。
         while (k > 0 && fast.next != null) {
             fast = fast.next;
             k--;

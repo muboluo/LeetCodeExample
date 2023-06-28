@@ -11,6 +11,41 @@ public class AddTwoNum {
 
     }
 
+    private static ListNode add2(ListNode head1, ListNode head2) {
+
+        ListNode result = new ListNode(-1);
+        ListNode currentNode = result;
+
+        if (head1 == null && head2 == null) {
+            return result;
+        }
+
+        ListNode cur1 = head1;
+        ListNode cur2 = head2;
+        int carry = 0;
+
+        while (cur1 != null || cur2 != null) {
+
+            int currentTotal = cur1 == null ? 0 : cur1.value + (cur2 == null ? 0 : cur2.value) + carry;
+
+            carry = currentTotal > 10 ? 1 : 0;
+            currentTotal = currentTotal % 10;
+
+            // 解法 1 与这里的解法不太相同，但基本一致。去别在于是否使用新的空间。
+            currentNode.next = new ListNode(currentTotal);
+
+            cur1 = cur1 != null ? cur1.next : null;
+            cur2 = cur2 != null ? cur2.next : null;
+            currentNode = currentNode.next;
+        }
+
+        if (carry == 1) {
+            currentNode.next = new ListNode(1);
+        }
+
+        return result;
+    }
+
     private static ListNode add(ListNode head1, ListNode head2) {
 
         ListNode result = null;
@@ -31,7 +66,7 @@ public class AddTwoNum {
             currentTotal %= 10;
 
             // save currentTotal
-            result = node1 == null? node2: node1;
+            result = node1 == null ? node2 : node1;
             if (resultHead == null) {
                 resultHead = result;
             }

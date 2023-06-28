@@ -7,6 +7,38 @@ public class DeleteCountdownNNode {
 
     }
 
+    private static ListNode removeEnd2(ListNode head, int num) {
+
+        if (head == null || num < 0) {
+            return head;
+        }
+
+        int count = 0;
+        ListNode cur = head;
+
+        while (cur != null) {
+            cur = cur.next;
+            count++;
+        }
+
+        if (count < num) {
+            return head;
+        }
+
+        int del = count - num;
+
+        cur = head;
+
+        while (del > 0) {
+            cur = cur.next;
+            del--;
+        }
+
+        cur.next = cur.next.next;
+
+        return head;
+    }
+
     private static ListNode removeEnd(ListNode head, int num) {
 
 

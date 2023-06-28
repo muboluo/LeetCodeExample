@@ -103,6 +103,27 @@ fun cycle4(head: ListNode?): Boolean {
     return false;
 }
 
+fun cycle5(head: ListNode?): Boolean {
+
+    if (head == null) {
+        return false
+    }
+
+    var slow: ListNode? = head
+
+    var fast: ListNode? = head.next
+
+    while (fast?.next != null) {
+
+        if (fast == slow) {
+            return true
+        }
+
+        fast = fast.next?.next
+        slow = slow?.next
+    }
+    return false
+}
 
 fun main() {
 
