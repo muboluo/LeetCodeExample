@@ -41,9 +41,44 @@ public class BinaryTreeLevelOrderTraversal {
                     nodeList.add(node.right);
                 }
             }
-
             result.add(currentLevel);
+        }
+        return result;
+    }
 
+
+    // 第一种方法 - 第二遍
+    private static List<List<Integer>> leverOrderTraversal_1_2(TreeNode root) {
+
+        if (root == null) {
+            return null;
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        LinkedList<TreeNode> currentList = new LinkedList<>();
+
+        currentList.add(root);
+
+        while (!currentList.isEmpty()) {
+
+            int len = currentList.size();
+
+            List<Integer> currentLevelList = new ArrayList<>();
+
+            for (int i = 0; i < len; i++) {
+
+                TreeNode pop = currentList.removeFirst();
+                currentLevelList.add(pop.value);
+
+                if (pop.left != null) {
+                    currentList.add(pop.left);
+                }
+                if (pop.right != null) {
+                    currentList.add(pop.right);
+                }
+            }
+            result.add(currentLevelList);
         }
 
         return result;
@@ -76,6 +111,39 @@ public class BinaryTreeLevelOrderTraversal {
         }
     }
 
+
+    private static List<List<Integer>> leverOrderTraversal_2_2(TreeNode node) {
+
+        if (node == null) {
+            return null;
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+        dfs2(1, result, node);
+
+        return result;
+    }
+
+    private static void dfs2(int index, List<List<Integer>> result, TreeNode node) {
+
+        if (node == null) {
+            return;
+        }
+
+        if (result.size() < index) {
+            result.add(new ArrayList<>());
+        }
+
+        result.get(index - 1).add(node.value);
+
+        if (node.left != null) {
+            dfs2(index + 1, result, node.left);
+        }
+
+        if (node.right != null) {
+            dfs2(index + 1, result, node.right);
+        }
+    }
 
     private static class TreeNode {
 

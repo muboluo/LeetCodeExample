@@ -30,6 +30,24 @@ public class TreeTraversal {
         //result.add(node.value);
     }
 
+    public static void dfs2(TreeNode node, List<Integer> result) {
+
+
+        if (node == null) {
+            return;
+        }
+
+        //前序
+        result.add(node.value);
+
+        dfs2(node.left, result);
+        // 中序
+        //result.add(node.value);
+
+        dfs2(node.right, result);
+//        result.add(node.value);
+    }
+
     private static class TreeNode {
 
         public TreeNode left;
@@ -38,7 +56,7 @@ public class TreeTraversal {
 
     }
 
-    // 使用栈 实现
+    // 使用栈 实现 中序遍历
     private static List<Integer> inorderTraversal(TreeNode node) {
 
         // 定义 临时变量和结果
@@ -63,6 +81,31 @@ public class TreeTraversal {
                 node = pop.right;
             }
         }
+        return result;
+    }
+
+    private static List<Integer> inorderTraversal2(TreeNode node) {
+
+        List<Integer> result = new ArrayList<>();
+
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (node != null || !stack.isEmpty()) {
+
+            if (node != null) {
+                stack.add(node);
+                node = node.left;
+            } else {
+                if (stack.isEmpty()) {
+                    return result;
+                } else {
+                    TreeNode pop = stack.pop();
+                    result.add(pop.value);
+                    node = pop.right;
+                }
+            }
+        }
+
         return result;
     }
 }

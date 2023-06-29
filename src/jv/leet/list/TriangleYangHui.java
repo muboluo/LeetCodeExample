@@ -10,6 +10,31 @@ public class TriangleYangHui {
 
     }
 
+    public static List<List<Integer>> generate2(int numRows) {
+
+        if (numRows <= 0) {
+            return null;
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < numRows; i++) {
+
+            List<Integer> currentList = new ArrayList<>();
+
+            for (int j = 0; j <= i; j++) {
+
+                if (j == 0 || j == i) {
+                    currentList.add(1);
+                } else {
+                    currentList.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+                }
+            }
+            result.add(currentList);
+        }
+        return result;
+    }
+
     public static List<List<Integer>> generate(int numRows) {
 
 

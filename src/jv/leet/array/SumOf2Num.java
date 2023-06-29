@@ -13,6 +13,7 @@ import java.util.Map;
  * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/two-sum
+ * 与查找 括号类似
  */
 
 class SumOf2Num {
@@ -25,7 +26,6 @@ class SumOf2Num {
 
         Map<Integer, Integer> valueIndexMap = new HashMap<>();
 
-
         for (int i = 0; i < nums.length; i++) {
             int anotherValue = target - nums[i];
             if (valueIndexMap.containsKey(anotherValue)) {
@@ -37,6 +37,25 @@ class SumOf2Num {
 
         return new int[]{-1, -1};
 
+    }
+
+    private static int[] twoSum5(int[] nums, int target) {
+        if (nums == null || nums.length < 2) {
+            return new int[]{-1, -1};
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int anotherValue = target - nums[i];
+            if (map.containsKey(anotherValue)) {
+                return new int[]{i, map.get(anotherValue)};
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return new int[]{-1, -1};
     }
 
     public static void main(String[] args) {

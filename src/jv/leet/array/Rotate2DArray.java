@@ -41,4 +41,28 @@ public class Rotate2DArray {
 
         return nums;
     }
+
+    public static int[][] rotate2(int[][] nums, int n) {
+
+        if (nums == null || n <= 0) {
+            return null;
+        }
+
+        for (int i = 0; i < n / 2; i++) {
+            int[] num = nums[i];
+            nums[i] = nums[n - i];
+            nums[n - i] = num;
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+
+                int temp = nums[i][j];
+                nums[i][j] = nums[j][i];
+                nums[j][i] = temp;
+            }
+        }
+
+        return nums;
+    }
 }

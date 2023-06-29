@@ -34,4 +34,32 @@ public class SearchInsertPosition {
 
         return left;
     }
+
+    public static int insertPos2(int[] nums, int target) {
+
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int left = 0, right = nums.length - 1;
+
+        int middle = 0;
+        while (left < right) {
+
+            middle = (left + right) / 2;
+
+            if (target == nums[middle]) {
+                return middle;
+            } else if (target < nums[middle]) {
+                right = nums[middle - 1];
+            } else {
+
+                left = nums[middle + 1];
+            }
+        }
+
+        return left;
+
+
+    }
 }

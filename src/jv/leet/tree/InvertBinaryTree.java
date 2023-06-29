@@ -27,6 +27,20 @@ public class InvertBinaryTree {
         return root;
     }
 
+    private static TreeNode invertBinaryTree1_2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        invertBinaryTree1_2(root.left);
+        invertBinaryTree1_2(root.right);
+        return root;
+    }
+
     private static TreeNode invertBinaryTree2(TreeNode root) {
 
         if (root == null) {
@@ -51,12 +65,40 @@ public class InvertBinaryTree {
 
 
             if (treeNode.right != null) {
+                nodeList.add(treeNode.right);
             }
         }
 
         return root;
     }
 
+    private static TreeNode invertBinaryTree2_2(TreeNode root) {
+
+        if (root == null) {
+            return null;
+        }
+
+        LinkedList<TreeNode> rootList = new LinkedList<>();
+
+        rootList.add(root);
+
+        while (rootList.size() > 0) {
+
+            TreeNode remove = rootList.removeFirst();
+
+            TreeNode temp = remove.left;
+            remove.left = remove.right;
+            remove.right = temp;
+            if (remove.left != null) {
+                rootList.add(temp.left);
+            }
+            if (remove.right != null) {
+                rootList.add(temp.right);
+            }
+        }
+
+        return root;
+    }
 
     private static class TreeNode {
 

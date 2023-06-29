@@ -27,7 +27,7 @@ public class SpiralTraversal {
             }
 
             // right
-            for (int i = i1 ; i < i2; i++) {
+            for (int i = i1; i < i2; i++) {
                 result[i][j2] = item++;
             }
 
@@ -38,7 +38,7 @@ public class SpiralTraversal {
 
             // left
             for (int i = i2; i > i1; i--) {
-                result[i][j2] = item++;
+                result[i][j1] = item++;
             }
 
             // jump next level
@@ -50,4 +50,45 @@ public class SpiralTraversal {
 
         return result;
     }
+
+    public static int[][] generate(int n) {
+
+        if (n <= 0) {
+            return null;
+        }
+
+        int[][] result = new int[n][n];
+
+        int i1 = 0, i2 = n - 1, j1 = 0, j2 = n - 1;
+
+        int current = 0;
+
+        while (i1 <= i2 && j1 <= j2) {
+
+            for (int i = i1; i < i2; i++) {
+                result[j1][i] = current++;
+            }
+
+            for (int j = j1; j < j2; j++) {
+                result[j][i2] = current++;
+            }
+
+            for (int i = i2; i > i1; i--) {
+                result[j2][i] = current++;
+            }
+
+            for (int j = j2; j > j1; j--) {
+                result[j][i1] = current++;
+            }
+
+            i1++;
+            i2--;
+            j1++;
+            j2--;
+        }
+
+
+        return result;
+    }
+
 }
