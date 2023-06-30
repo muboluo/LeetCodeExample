@@ -40,4 +40,26 @@ public class MergeArea {
         return merged.toArray(new int[0][]);
 
     }
+
+    public List<int[]> merge2(int[][] intervals) {
+
+        if (intervals == null) {
+            return null;
+        }
+
+        Arrays.sort(intervals, (x1, x2) -> x1[0] - x2[0]);
+
+        List<int[]> result = new ArrayList<>();
+
+        for (int[] interval : intervals) {
+
+            if (result.size() == 0 || result.get(result.size() - 1)[1] < interval[0]) {
+                result.add(interval);
+            } else {
+                result.get(result.size() - 1)[1] = Math.min(result.get(result.size() - 1)[1], interval[0]);
+            }
+        }
+
+        return result;
+    }
 }

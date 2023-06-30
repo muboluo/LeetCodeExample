@@ -63,4 +63,58 @@ public class CandieDistribute {
 
         return result;
     }
+
+    public static int[] distribute1_3(int candies, int count) {
+
+        if (candies <= 0 || count <= 0) {
+            return null;
+        }
+
+        int[] result = new int[count];
+
+        int times = 0;
+
+        while (candies > 0) {
+
+            for (int i = 0; i < count; i++) {
+
+                int defaultCount = times * count + i + 1;
+
+                if (candies > defaultCount) {
+
+                    result[i] += defaultCount;
+                    candies -= defaultCount;
+
+                } else {
+                    result[i] += candies;
+                    candies = 0;
+                    break;
+                }
+            }
+
+            times++;
+
+        }
+        return result;
+    }
+
+    public static int[] distribute2_3(int candies, int childCount) {
+
+        if (candies <= 0 || childCount <= 0) {
+            return null;
+        }
+
+        int totalCount = 0;
+        int[] result = new int[childCount];
+
+        while (candies > 0) {
+
+            result[totalCount % childCount] += Math.min(totalCount + 1, candies);
+            candies -= Math.min(totalCount + 1, candies);
+
+            totalCount++;
+        }
+
+        return result;
+    }
 }

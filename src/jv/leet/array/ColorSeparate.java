@@ -54,7 +54,7 @@ public class ColorSeparate {
                 cur++;
             } else if (colors[cur] == 2) {
                 colors[cur] = colors[right];
-                colors[right] = 0;
+                colors[right] = 2;
                 right--;
             } else {
                 cur++;
@@ -62,6 +62,38 @@ public class ColorSeparate {
 
         }
 
+        return colors;
+
+    }
+
+    public static int[] separate3(int[] colors) {
+
+        if (colors == null || colors.length == 0) {
+            return null;
+        }
+
+        // 方法 1 ： 遍历一遍，分别计数。然后在将数组重新赋值。
+        // 方法 2：  类似于移动 0，先移动 0 ，再移动 1.
+        // 方法 3：  左右同时遍历
+        int left = 0, cur = 0, right = colors.length - 1;
+
+        while (left < right) {
+
+            if (colors[cur] == 0) {
+                colors[cur] = colors[left];
+                colors[left] = 0;
+
+                cur++;
+                left++;
+            } else if (colors[cur] == 2) {
+
+                colors[cur] = colors[right];
+                colors[right] = 2;
+                right--;
+            } else {
+                cur++;
+            }
+        }
         return colors;
 
     }

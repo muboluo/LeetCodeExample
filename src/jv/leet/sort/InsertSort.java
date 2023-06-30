@@ -41,4 +41,26 @@ public class InsertSort {
         }
         return array;
     }
+
+    // currentItem 和他之前所有的对比，找到第一个比他小的 item 的 index 为止。
+    // 将 currentItem 的值，赋值给比他小的 item 的后面一项。
+    private static int[] sort3(int[] nums) {
+
+        if (nums == null || nums.length == 0) {
+            return nums;
+        }
+
+        for (int i = 0; i < nums.length - 1; i++) {
+
+            int currentItem = nums[i + 1];
+            int preIndex = i;
+            while (preIndex >= 0 && currentItem < nums[preIndex]) {
+                nums[preIndex + 1] = nums[preIndex];
+                preIndex--;
+            }
+            nums[preIndex + 1] = currentItem;
+        }
+
+        return nums;
+    }
 }

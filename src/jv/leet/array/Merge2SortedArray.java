@@ -69,4 +69,36 @@ public class Merge2SortedArray {
         }
         return nums1;
     }
+
+    private static int[] merge2_2(int[] nums1, int m, int[] nums2, int n) {
+
+        if ((nums1 == null && nums2 == null) || m < 0 || n < 0) {
+            return new int[0];
+        } else if (nums1 == null) {
+            return nums2;
+        } else if (nums2 == null) {
+            return nums1;
+        }
+
+        int k1 = m - 1;
+        int k2 = n - 1;
+
+        int num1Right = m + n - 1;
+
+        while (k1 >= 0 || k2 >= 0) {
+
+            if (k1 < 0) {
+                nums1[num1Right--] = nums2[k2--];
+            } else if (k2 < 0) {
+
+                nums1[num1Right--] = nums1[k1--];
+            } else if (nums1[k1] > nums2[k2]) {
+                nums1[num1Right--] = nums1[k1--];
+            } else {
+                nums1[num1Right--] = nums2[k2--];
+            }
+        }
+
+        return nums1;
+    }
 }

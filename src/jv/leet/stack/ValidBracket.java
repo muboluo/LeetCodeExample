@@ -10,7 +10,7 @@ public class ValidBracket {
 
     }
 
-    public boolean isValid(String str) {
+    private boolean isValid(String str) {
 
         if (str == null || str.isEmpty()) {
             return false;
@@ -44,5 +44,40 @@ public class ValidBracket {
 
         }
         return result.isEmpty();
+    }
+
+    private boolean isValid2(String str) {
+
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+
+        Map<Character, Character> charMap = new HashMap<>();
+        charMap.put(')', '(');
+        charMap.put(']', '[');
+        charMap.put('}', '{');
+
+        Stack<Character> charStack = new Stack<>();
+
+        for (int i = 0; i < str.length(); i++) {
+
+            char current = str.charAt(i);
+
+            // 表示左括号
+            if (!charMap.containsKey(current)) {
+                charStack.add(current);
+            } else {
+                if (charStack.isEmpty()) {
+                    return false;
+                }
+
+                Character pop = charStack.pop();
+
+                if (!charMap.get(current).equals(pop)) {
+                    return false;
+                }
+            }
+        }
+        return charStack.isEmpty();
     }
 }

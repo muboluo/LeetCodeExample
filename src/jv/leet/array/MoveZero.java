@@ -331,19 +331,45 @@ public class MoveZero {
      */
     private static void moveZeroBy2For(int[] ints) {
 
+        if (ints == null || ints.length == 0) {
+            return;
+        }
+
         int j = 0;
-        // 移动非 0 元素
         for (int i = 0; i < ints.length; i++) {
 
             if (ints[i] != 0) {
                 ints[j++] = ints[i];
             }
         }
-        // 补充 0  元素
+
         for (int i = j; i < ints.length; i++) {
             ints[i] = 0;
         }
 
         System.out.println(Arrays.toString(ints));
+    }
+
+    // 左右夹逼法
+    private static int removeElement(int[] nums, int target) {
+
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int left = 0, right = nums.length - 1;
+
+        while (left < right) {
+
+            if (nums[left] == target) {
+                nums[left] = nums[right];
+                right--;
+            } else {
+                left++;
+            }
+        }
+
+        return left;
+
     }
 }

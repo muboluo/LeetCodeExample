@@ -127,4 +127,29 @@ class MaxArea {
         return result;
     }
 
+
+    private static int maxArea5(int[] nums) {
+        int maxArea = -1;
+        if (nums == null || nums.length == 0) {
+            return maxArea;
+        }
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+
+            int currentArea = (right - left) * Math.min(nums[left], nums[right]);
+
+            maxArea = Math.max(currentArea, maxArea);
+
+            if (nums[left] < nums[right]) {
+                left++;
+            } else {
+                right--;
+            }
+
+        }
+        return maxArea;
+    }
 }
