@@ -41,7 +41,7 @@ public class ReverseNodeInKGroup2 {
         ListNode temp = head;
         String result2 = "";
         while (temp != null) {
-            result2 = result2 + " " +  temp.value;
+            result2 = result2 + " " + temp.value;
             temp = temp.next;
         }
         System.out.println(result2);
@@ -93,18 +93,82 @@ public class ReverseNodeInKGroup2 {
     /**
      * 反转
      */
-    private static  ListNode reverseNode(ListNode head){
+    private static ListNode reverseNode(ListNode head) {
         ListNode cur = head;
         ListNode pre = head;
-        while (cur !=null){
+        while (cur != null) {
             ListNode temp = cur.next;
             cur.next = pre;
-            pre =cur;
+            pre = cur;
             cur = temp;
         }
         return pre;
     }
 
+
+    private static ListNode reverse(ListNode node, int k) {
+        // 1. set terminal
+        if (node == null || k <= 0) {
+            return node;
+        }
+
+        // 2. init temp
+        ListNode preHead = new ListNode(-1);
+        preHead.next = node;
+        // 每组的前一项
+        ListNode preKGroup = preHead;
+
+        int i = k;
+
+        // 3. set loop clause
+        while (preKGroup.next != null) {
+
+            ListNode current = preKGroup;
+
+            while (i > 0 && current.next != null) {
+                current = current.next;
+                i--;
+            }
+
+            // 4. set loop terminal
+            if (i > 0) {
+                return preHead.next;
+            }
+
+            // 5. record preHead ande end
+            ListNode headBeforeReverse = preKGroup.next;
+            ListNode headInNext = current.next;
+
+            current.next = null;
+
+            // reverseNode
+            preKGroup.next = reverseNodeGroup2(headBeforeReverse);
+
+            // 反转后的队尾
+            headBeforeReverse.next = headInNext;
+
+            i = k;
+            preKGroup = headBeforeReverse;
+
+        }
+
+        return preHead.next;
+
+    }
+
+    private static ListNode reverseNodeGroup2(ListNode node) {
+        ListNode pre = node;
+        ListNode current = node;
+
+        // 这里注意最后边界条件的判断。
+        while (current != null) {
+            ListNode temp = current.next;
+            current.next = pre;
+            pre = current;
+            current = temp;
+        }
+        return pre;
+    }
 
     private static class ListNode {
 

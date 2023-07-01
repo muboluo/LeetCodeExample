@@ -110,4 +110,59 @@ public class QuickSort {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+    private static int[] sort3(int[] nums) {
+
+        // terminal
+        if (nums == null || nums.length == 0) {
+            return nums;
+        }
+
+        return quickSort3(nums, 0, nums.length - 1);
+    }
+
+    private static int[] quickSort3(int[] nums, int leftIndex, int rightIndex) {
+
+        if (leftIndex < rightIndex) {
+
+            int separateIndex = partion3(nums, leftIndex, rightIndex);
+            quickSort3(nums, leftIndex, separateIndex - 1);
+            quickSort3(nums, separateIndex + 1, rightIndex);
+        }
+
+        return nums;
+
+    }
+
+    private static int partion3(int[] nums, int leftIndex, int rightIndex) {
+
+        int pivot = leftIndex;
+
+        // 保存当前 swap 后，大于 nums[pivot] 的第一个 index.
+        int finalLeftIndex = leftIndex + 1;
+
+        for (int i = pivot + 1; i < nums.length; i++) {
+
+            if (nums[i] < nums[pivot]) {
+                swap3(nums, i, pivot);
+                // 每移动一次，就加一。
+                finalLeftIndex++;
+            }
+        }
+
+        // 此时，index 指向的是 比 pivot 大的一方的最小的位置.
+        // 将 pivot的值换到这个位置，这个 index 就是最终该值所在的位置。
+        swap3(nums, finalLeftIndex - 1, pivot);
+
+        return finalLeftIndex - 1;
+    }
+
+    private static void swap3(int[] nums, int a, int b) {
+
+        if (nums != null && a < nums.length && b < nums.length) {
+            int temp = nums[a];
+            nums[a] = nums[b];
+            nums[b] = temp;
+        }
+    }
 }

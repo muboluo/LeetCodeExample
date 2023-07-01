@@ -36,4 +36,37 @@ public class Shell {
 
         return nums;
     }
+
+    private int[] shellSort2(int[] nums) {
+
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+
+        int len = nums.length;
+        int gap = len / 2;
+
+        // 注意这里的范围，= 1 的时候也是要排序的。
+        while (gap > 0) {
+
+            int currentItem = nums[gap];
+
+            for (int i = gap; i < nums.length; i++) {
+
+                // 注意这里不要写反了，i - gap
+                int preIndex = i - gap;
+                while (preIndex >= 0 && nums[preIndex] > currentItem) {
+                    // 注意 这里是使用 preindex 的后 gap 项，接受 preIndex. 想一下动态图。
+                    nums[preIndex + gap] = nums[preIndex];
+                    preIndex -= gap;
+                }
+
+                nums[preIndex + gap] = currentItem;
+            }
+
+            gap /= 2;
+        }
+
+        return nums;
+    }
 }
