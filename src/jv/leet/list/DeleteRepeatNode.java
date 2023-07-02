@@ -16,7 +16,7 @@ public class DeleteRepeatNode {
 
         while (temp.next != null) {
 
-            if (temp.value == temp.next.value) {
+            if (temp.next.value == temp.value) {
                 temp.next = temp.next.next;
             } else {
                 temp = temp.next;

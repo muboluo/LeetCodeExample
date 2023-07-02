@@ -78,6 +78,39 @@ public class DeleteCountdownNNode {
         return tempHead.next;
     }
 
+    private static ListNode removeBackwardK(ListNode head, int backwardK) {
+
+        if (head == null) {
+            return null;
+        }
+
+        ListNode preHead = new ListNode();
+        preHead.next = head;
+        ListNode current = preHead;
+        int count = 0;
+        while (current != null) {
+            current = current.next;
+            count++;
+        }
+
+        if (count < backwardK) {
+            return preHead.next;
+        }
+
+        int forwardK = count - backwardK;
+
+        current = preHead;
+        while (forwardK > 0) {
+
+            current = current.next;
+            forwardK--;
+        }
+
+        current.next = current.next.next;
+
+        return preHead.next;
+    }
+
 
     private static class ListNode {
 

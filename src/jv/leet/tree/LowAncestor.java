@@ -45,6 +45,19 @@ public class LowAncestor {
         return left != null ? left : right;
     }
 
+    private static TreeNode loWestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+
+        TreeNode left = loWestCommonAncestor3(root.left, p, q);
+        TreeNode right = loWestCommonAncestor3(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+
+        return left == null ? right : left;
+    }
     private static class TreeNode {
 
         public TreeNode left;

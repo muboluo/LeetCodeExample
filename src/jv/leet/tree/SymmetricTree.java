@@ -148,6 +148,31 @@ public class SymmetricTree {
         return true;
     }
 
+    // 第三次 使用递归实现
+    private static boolean isSymmetric1_3(TreeNode node) {
+
+        if (node == null) {
+            return true;
+        }
+
+        return dfs1_3(node.left, node.right);
+    }
+
+    private static boolean dfs1_3(TreeNode left, TreeNode right) {
+
+        if (left == null && right == null) {
+            return true;
+        } else if (left != null && right == null) {
+            return false;
+        } else if (left == null && right != null) {
+            return false;
+        } else if (left.value != right.value) {
+            return false;
+        }
+
+        return dfs1_3(left.right, right.left) && dfs1_3(left.left, right.right);
+    }
+
     private static class TreeNode {
 
         public TreeNode left;

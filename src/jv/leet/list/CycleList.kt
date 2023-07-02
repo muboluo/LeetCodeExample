@@ -116,9 +116,8 @@ fun cycle5(head: ListNode?): Boolean {
     while (fast?.next != null) {
 
         if (fast == slow) {
-            return true
+            return true;
         }
-
         fast = fast.next?.next
         slow = slow?.next
     }

@@ -61,6 +61,32 @@ public class Merge2SortedList {
         return preHead.next;
     }
 
+    private static ListNode mergeTwoSortedList3(ListNode node1, ListNode node2) {
+
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+
+        ListNode head = new ListNode();
+        head.value = -1;
+        ListNode current = head;
+
+        while (node1 != null && node2 != null) {
+            if (node1.value <= node2.value) {
+                current.next = node1;
+                node1 = node1.next;
+            } else {
+                current.next = node2;
+                node2 = node2.next;
+            }
+            current = current.next;
+        }
+
+        current.next = node1 == null ? node2 : node1;
+
+        return head.next;
+    }
+
 
     private static class ListNode {
 

@@ -155,6 +155,24 @@ class ReverseList {
 
             return pre
         }
+
+        fun reverseList7(node: ListNode?):ListNode? {
+
+            var current = node
+
+            var temp: ListNode? = null
+            var pre: ListNode? = null
+
+            while (current != null) {
+
+                temp = current.next
+                current.next = pre
+                pre = current
+                current = temp
+            }
+
+            return pre
+        }
     }
 }
 

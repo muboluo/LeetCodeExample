@@ -86,6 +86,43 @@ public class AddTwoNum {
         return resultHead;
     }
 
+    private static ListNode add3(ListNode head1, ListNode head2) {
+
+        ListNode result = null;
+        ListNode resultHead = null;
+
+        ListNode node1 = head1;
+        ListNode node2 = head2;
+
+        // 定义下层携带的数据
+        int carry = 0;
+        while (node1 != null || node2 != null) {
+
+            int currentResult = (node1 == null ? 0 : node1.value) + (node2 == null ? 0 : node2.value) + carry;
+
+            carry = currentResult > 10 ? 1 : 0;
+
+            currentResult %= currentResult;
+
+            result = node1 == null ? node2 : node1;
+
+            if (resultHead == null) {
+                resultHead = result;
+            }
+            result.value = currentResult;
+
+            node1 = node1 != null ? node1.next : null;
+            node2 = node2 != null ? node2.next : null;
+            result.next = node1 == null ? node2 : node1;
+
+        }
+
+        if (carry == 1) {
+            result.next = new ListNode(1);
+        }
+        return resultHead;
+    }
+
 
     private static class ListNode {
 
