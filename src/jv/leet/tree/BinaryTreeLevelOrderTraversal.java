@@ -112,7 +112,7 @@ public class BinaryTreeLevelOrderTraversal {
     }
 
 
-    private static List<List<Integer>> leverOrderTraversal_2_2(TreeNode node) {
+    private static List<List<Integer>> levelOrderTraversal_2_2(TreeNode node) {
 
         if (node == null) {
             return null;
@@ -142,6 +142,36 @@ public class BinaryTreeLevelOrderTraversal {
 
         if (node.right != null) {
             dfs2(index + 1, result, node.right);
+        }
+    }
+
+    private static List<List<Integer>> levelOrderTraversal_2_3(TreeNode node) {
+
+
+        if (node == null) {
+            return null;
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+        dfs3(node, result, 1);
+        return result;
+    }
+
+    private static void dfs3(TreeNode node, List<List<Integer>> result, int currentLevel) {
+
+        if (result.size() < currentLevel) {
+            result.add(new ArrayList<>());
+        }
+
+        result.get(currentLevel - 1).add(node.value);
+
+        if (node.left != null) {
+            dfs3(node.left, result, currentLevel + 1);
+        }
+
+        if (node.right != null) {
+
+            dfs3(node.right, result, currentLevel + 1);
         }
     }
 

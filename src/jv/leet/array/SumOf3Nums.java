@@ -212,4 +212,60 @@ class SumOf3Nums {
 
         return result;
     }
+
+    public static List<List<Integer>> threeSum4(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        Arrays.sort(nums);
+
+
+        int left;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            left = i;
+            int middle = left + 1;
+            int right = nums.length - 1;
+
+            while (middle < right) {
+
+                if (nums[left] > 0) {
+                    break;
+                }
+
+                if (left > 0 && nums[left] == nums[left - 1]) {
+                    continue;
+                }
+
+                int count = nums[left] + nums[middle] + nums[right];
+
+                if (count == 0) {
+
+                    result.add(Arrays.asList(left, middle, right));
+
+                    while (middle < right && nums[middle] == nums[middle + 1]) {
+                        middle++;
+                    }
+
+                    while (middle < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
+                    middle++;
+                    right--;
+                } else if (count > 0) {
+                    right--;
+                } else {
+                    middle++;
+                }
+
+            }
+
+        }
+        return result;
+
+    }
 }

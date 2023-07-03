@@ -59,4 +59,25 @@ public class FindDisappearedNum {
 
         return result;
     }
+
+    public static List<Integer> findDisappearedNumbers3(int[] nums) {
+
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            int index = (nums[i] - 1) % len;
+            nums[index] += len;
+        }
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+
+            if (nums[i] < len) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
 }
