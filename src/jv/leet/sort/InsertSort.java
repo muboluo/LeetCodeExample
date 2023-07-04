@@ -63,4 +63,25 @@ public class InsertSort {
 
         return nums;
     }
+
+    // 关键点：倒叙，preIndex currentItem
+    private static int[] sort4(int[] nums) {
+
+        if (nums == null) {
+            return null;
+        }
+
+        for (int i = 0; i < nums.length - 1; i++) {
+
+            int currentItem = nums[i + 1];
+            int preIndex = i;
+
+            while (preIndex >= 0 && currentItem < nums[preIndex]) {
+                nums[preIndex + 1] = nums[preIndex];
+                preIndex--;
+            }
+            nums[preIndex + 1] = currentItem;
+        }
+        return nums;
+    }
 }

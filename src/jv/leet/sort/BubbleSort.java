@@ -29,4 +29,27 @@ public class BubbleSort {
         return nums;
 
     }
+
+    // 关键点
+    // 1. 比较相邻 index 的大小。
+    private static int[] bubbleSort2(int[] nums) {
+
+        if (nums == null) {
+            return null;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+
+            for (int j = 0; j < nums.length - i - 1; j++) {
+
+                if (nums[j + 1] < nums[j]) {
+                    int temp = nums[j + 1];
+                    nums[j + 1] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+
+        return nums;
+    }
 }

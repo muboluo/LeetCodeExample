@@ -37,4 +37,33 @@ public class SelectSort {
 
         return nums;
     }
+
+    // 关键点： minIndex
+    public static int[] sort2(int[] nums) {
+
+        if (nums == null) {
+            return null;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int minIndex = i;
+
+            for (int j = i + 1; j < nums.length; j++) {
+
+                if (nums[minIndex] > nums[j]) {
+                    minIndex = j;
+                }
+
+            }
+
+            if (minIndex != i) {
+                int temp = nums[minIndex];
+                nums[minIndex] = nums[i];
+                nums[i] = temp;
+            }
+        }
+
+        return nums;
+    }
 }

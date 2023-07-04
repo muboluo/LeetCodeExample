@@ -372,4 +372,44 @@ public class MoveZero {
         return left;
 
     }
+
+    // 都从左边出发
+    private static int removeElement1_2(int[] nums, int target) {
+
+        if (nums == null) {
+            return -1;
+        }
+
+        int j = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] != nums[j]) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+            }
+        }
+        return j;
+
+    }
+
+    // 左右夹逼法
+    private static int removeElement2_2(int[] nums, int target) {
+
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int left = 0, right = nums.length - 1;
+
+        while (left < right) {
+            if (nums[left] == target) {
+                nums[left] = nums[right--];
+            } else {
+                left++;
+            }
+        }
+        return left;
+    }
 }
